@@ -15,8 +15,6 @@ import java.sql.SQLException;
 public class consultaCiudades {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet resultSet = null;
@@ -30,7 +28,8 @@ public class consultaCiudades {
 			// Toma la conexion. parametros: direccion del servidor, username,
 			// password
 			// SqlException needs to be handled
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/clase", "clase","claseingenieriaweb");
+			// normalmente se crea un usuario con permisos minimos en mysql
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/federico", "root","root");
 			
 			//For the table name, SQL is caps sensitive in Linux and non sensitive in Windows.
 			ps = connection.prepareStatement("select * from ciudades");
