@@ -20,6 +20,11 @@ public interface CiudadDao {
 	 * @throws ClaseExceptionDao cuando hay un error consultado la BD
 	 */
 	public List<Ciudad> obtener() throws ClaseExceptionDao;
+
+	Ciudad obtenerCiudad(Integer codigo) throws ClaseExceptionDao;
+
+	public void guardar(Ciudad ciudad) throws ClaseExceptionDao;
+	
 	
 
 }

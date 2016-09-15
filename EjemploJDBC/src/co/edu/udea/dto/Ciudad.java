@@ -9,7 +9,7 @@ package co.edu.udea.dto;
 
 public class Ciudad {
 	
-	private String codigo;
+	private Integer codigo;
 	private String nombre;
 	private String codigoArea;
 	
@@ -25,10 +25,10 @@ public class Ciudad {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 	

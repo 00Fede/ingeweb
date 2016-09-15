@@ -19,6 +19,7 @@ public class CiudadDaoImpl implements CiudadDao{
 	 * @throws ClaseExceptionDao cuando hay un error consultado la BD
 	 */
 	@Override
+	
 	public List<Ciudad> obtener() throws ClaseExceptionDao{
 		
 		Connection c = null;
@@ -28,13 +29,13 @@ public class CiudadDaoImpl implements CiudadDao{
 		
 		try {
 			c = Datasource.getInstance().getConnection();
-			ps = c.prepareStatement("SELECT * FROM CIUDADES");
+			ps = c.prepareStatement("SELECT * FROM ciudades");
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
 				
 				Ciudad ciudad = new Ciudad();
-				ciudad.setCodigo(rs.getString("Codigo"));
+				ciudad.setCodigo(rs.getInt("Codigo"));
 				ciudad.setNombre(rs.getString("Nombre"));
 				ciudad.setCodigoArea(rs.getString("CodigoArea"));
 				resultado.add(ciudad);
@@ -58,6 +59,81 @@ public class CiudadDaoImpl implements CiudadDao{
 			}
 		}
 		return resultado;
+	}
+	
+	@Override
+	public Ciudad obtenerCiudad(Integer codigo) throws ClaseExceptionDao{
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Ciudad resultado = new Ciudad();
+		
+		try {
+			c = Datasource.getInstance().getConnection();
+			//meter en ps param codigo puede provocar sql injection
+			ps = c.prepareStatement("SELECT * FROM ciudades "
+					+ "WHERE codigo = ?");
+			//esto evita el sqlinjection
+			ps.setInt(1, codigo);
+			rs = ps.executeQuery();
+			
+			if(rs.next()){
+			resultado.setCodigo(rs.getInt("Codigo"));
+			resultado.setNombre(rs.getString("Nombre"));
+			resultado.setCodigoArea(rs.getString("CodigoArea"));
+			}
+		}catch(SQLException e){
+			throw new ClaseExceptionDao(e);
+		}finally {
+			//Se cierran todas las conexiones solo si no son nulas
+			try {
+				if(rs != null)
+					rs.close();	
+				
+				if(ps!=null)
+					ps.close();
+				
+				if(c != null)
+					c.close();
+			} catch (SQLException e2) {
+			throw new ClaseExceptionDao(e2);					
+			}
+		}
+		return resultado;
+		
+	}
+	@Override 
+	public void guardar(Ciudad ciudad) throws ClaseExceptionDao{
+		Connection c = null;
+		PreparedStatement ps = null;
+		
+		try {
+			c = Datasource.getInstance().getConnection();
+			//meter en ps param codigo puede provocar sql injection
+			ps = c.prepareStatement("INSERT INTO ciudades (codigo, Nombre,CodigoArea) VALUES(?,?,?)");
+			//esto evita el sqlinjection
+			ps.setInt(1, ciudad.getCodigo());
+			ps.setString(2, ciudad.getNombre());
+			ps.setString(3, ciudad.getCodigoArea());
+			
+			ps.execute();
+			
+		}catch(SQLException e){
+			throw new ClaseExceptionDao(e);
+		}finally {
+			//Se cierran todas las conexiones solo si no son nulas
+			try {	
+				if(ps!=null)
+					ps.close();
+				
+				if(c != null)
+					c.close();
+			} catch (SQLException e2) {
+			throw new ClaseExceptionDao(e2);					
+			}
+		}
+		
+		
 	}
 
 }

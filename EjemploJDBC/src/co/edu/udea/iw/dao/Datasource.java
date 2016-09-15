@@ -38,11 +38,13 @@ public class Datasource {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			connection = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306",
+					"jdbc:mysql://localhost:3306/federico",
 					"root",
 					"root");
 		}catch(ClassNotFoundException e){
 			throw new ClaseExceptionDao("No se encontro el driver de la base de datos.");
+		}catch (SQLException e) {
+			throw new ClaseExceptionDao(e);
 		}
 		return connection;
 		
