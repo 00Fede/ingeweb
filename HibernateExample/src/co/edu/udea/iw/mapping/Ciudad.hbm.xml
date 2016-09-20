@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/09/2016 01:16:20 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+ <!-- El nombre de table debe coincidir con el nombre de la tabla -->
+ <class name="co.edu.udea.iw.dto.Ciudad" table="ciudades">
+  <id name="codigo" type="java.lang.Long">
+   <column name="CODIGO" precision="0" scale="12"/>
+   <generator class="assigned"/>
+  </id>
+  <property generated="never" lazy="false" name="nombre" type="java.lang.String">
+   <column length="50" name="NOMBRE" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="codigoArea" type="java.lang.String">
+   <column length="4" name="CODIGOAREA" not-null="false"/>
+  </property>
+ </class>
+</hibernate-mapping>
