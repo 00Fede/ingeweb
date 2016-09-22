@@ -22,6 +22,7 @@ public class CiudadDaoHibernateTest {
 			ciudades = ciudadDao.obtener();
 			assertTrue(ciudades.size() > 0);
 		}catch(MyDaoException e){
+			e.printStackTrace();
 			fail(e.getMessage());
 		}
 	}
