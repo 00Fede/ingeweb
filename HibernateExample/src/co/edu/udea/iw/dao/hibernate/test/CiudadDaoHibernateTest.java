@@ -1,4 +1,4 @@
-package co.edu.udea.iw.dao.hibernate;
+package co.edu.udea.iw.dao.hibernate.test;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import co.edu.udea.iw.dao.CiudadDao;
+import co.edu.udea.iw.dao.hibernate.CiudadDaoHibernate;
 import co.edu.udea.iw.dto.Ciudad;
 import co.edu.udea.iw.exception.MyDaoException;
 

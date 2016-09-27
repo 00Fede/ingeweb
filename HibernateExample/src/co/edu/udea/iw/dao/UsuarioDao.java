@@ -20,5 +20,7 @@ public interface UsuarioDao {
 	 * @throws MyDaoException
 	 */
 	public List<Usuario> obtener() throws MyDaoException;
+	
+	public Usuario obtener(String login) throws MyDaoException;
 
 }

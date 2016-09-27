@@ -17,7 +17,13 @@
         <property name="contraseña" type="java.lang.String">
             <column name="Contrasena" length="125" />
         </property>
-        <many-to-one name="rol" class="co.edu.udea.iw.dto.Rol" fetch="join">
+        <!-- update=false insert=false si se quiere sobre este elemento hacer 
+        update o insert. 
+        fetch: puede ser join o select, los comandos SQL para hacer la union entre
+        las tablas.
+        lazy: selecciona la configuración perezosa de la sesion. Proxy o no Proxy-->
+        
+        <many-to-one name="rol" class="co.edu.udea.iw.dto.Rol" fetch="select" lazy="proxy">
             <column name="Rol" />
         </many-to-one>
     </class>
