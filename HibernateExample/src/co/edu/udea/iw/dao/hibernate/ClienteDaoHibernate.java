@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import co.edu.udea.iw.dao.ClienteDao;
 import co.edu.udea.iw.dao.Datasource;
@@ -55,12 +56,15 @@ public class ClienteDaoHibernate implements ClienteDao {
 	@Override
 	public void guardar(Cliente cliente) throws MyDaoException {
 		Session session = null;
+		Transaction tx = null;
 
 
 		try {
 			session = Datasource.getInstance().getSession();
 			//guarda el objeto cliente en la base de datos
+			tx = session.beginTransaction();
 			session.save(cliente);
+			tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);
@@ -72,6 +76,7 @@ public class ClienteDaoHibernate implements ClienteDao {
 	@Override
 	public void eliminar(String cedula) throws MyDaoException {
 		Session session = null;
+		Transaction tx = null;
 		
 		Cliente cliente = new Cliente();
 		cliente.setCedula(cedula);
@@ -81,7 +86,9 @@ public class ClienteDaoHibernate implements ClienteDao {
 			session = Datasource.getInstance().getSession();
 			//elimina el objeto ciudad en la base de datos
 			//Solo busca por clave primaria.
+			tx = session.beginTransaction();
 			session.delete(cliente);
+			tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);
@@ -92,12 +99,15 @@ public class ClienteDaoHibernate implements ClienteDao {
 	@Override
 	public void modificar(Cliente cliente) throws MyDaoException {
 		Session session = null;
+		Transaction tx = null;
 
 
 		try {
 			session = Datasource.getInstance().getSession();
 			//Actualiza el objeto cliente en la base de datos
+			tx = session.beginTransaction();
 			session.update(cliente);
+			tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);

@@ -6,11 +6,8 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-
 import co.edu.udea.iw.dao.Datasource;
 import co.edu.udea.iw.dao.UsuarioDao;
-import co.edu.udea.iw.dto.Ciudad;
 import co.edu.udea.iw.dto.Usuario;
 import co.edu.udea.iw.exception.MyDaoException;
 
@@ -18,7 +15,6 @@ public class UsuarioDaoHibernate implements UsuarioDao {
 
 	@Override
 	public List<Usuario> obtener() throws MyDaoException {
-		// TODO Auto-generated method stub
 		Session session = null;
 		
 		List<Usuario> resultado = null;

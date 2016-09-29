@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import co.edu.udea.iw.dao.CiudadDao;
@@ -60,12 +61,15 @@ public class CiudadDaoHibernate implements CiudadDao {
 	@Override
 	public void guardar(Ciudad ciudad) throws MyDaoException {
 		Session session = null;
+		Transaction tx = null;
 
 
 		try {
 			session = Datasource.getInstance().getSession();
 			//guarda el objeto ciudad en la base de datos
+			tx = session.beginTransaction();
 			session.save(ciudad);
+			tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);
@@ -77,12 +81,15 @@ public class CiudadDaoHibernate implements CiudadDao {
 	@Override
 	public void modificar(Ciudad ciudad) throws MyDaoException {
 		Session session = null;
+		Transaction tx = null;
 
 
 		try {
 			session = Datasource.getInstance().getSession();
 			//Actualiza el objeto ciudad en la base de datos
+			tx = session.beginTransaction();
 			session.update(ciudad);
+			tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);
@@ -94,7 +101,7 @@ public class CiudadDaoHibernate implements CiudadDao {
 	@Override
 	public void eliminar(Long codigo) throws MyDaoException {
 		Session session = null;
-		
+		Transaction tx = null;
 		Ciudad ciudad = new Ciudad();
 		ciudad.setCodigo(codigo);
 
@@ -103,7 +110,9 @@ public class CiudadDaoHibernate implements CiudadDao {
 			session = Datasource.getInstance().getSession();
 			//elimina el objeto ciudad en la base de datos
 			//Solo busca por clave primaria.
+			tx = session.beginTransaction();
 			session.delete(ciudad);
+			tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);

@@ -8,14 +8,11 @@ public class MyDaoException extends Exception {
 
 	public MyDaoException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Auto-generated constructor stub
 		log.error(message);
 	}
 
 	public MyDaoException(Throwable cause) {
 		super(cause);
-		
-		// TODO Auto-generated constructor stub
 		log.error(cause.getMessage());
 	}
 	

@@ -39,5 +39,13 @@
         <property name="fechaEliminacion" type="java.util.Date">
             <column name="FechaEliminacion" />
         </property>
+        
+        <!--Relacion entre uno a muchos entre Clientes y Direcciones-->
+        <!--
+        <set name="direcciones">
+        	<key column="cedula"></key>
+        	<one-to-many class="co.edu.udea.iw.dto.Direccion"/>
+        </set>
+        -->
     </class>
 </hibernate-mapping>
