@@ -52,7 +52,7 @@ public class UsuarioDaoHibernate implements UsuarioDao {
 			usuario = (Usuario) session.get(Usuario.class,login);
 		
 			/**Igual que session get. Si no existe el registro lanza excepcion*/
-			usuario = (Usuario) session.load(Usuario.class,login);
+			//usuario = (Usuario) session.load(Usuario.class,login);
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);

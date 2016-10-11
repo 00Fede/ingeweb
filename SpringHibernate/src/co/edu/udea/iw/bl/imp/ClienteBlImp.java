@@ -68,7 +68,6 @@ public class ClienteBlImp implements ClienteBl {
 		cliente.setEmail(email);
 		Usuario u = new Usuario();
 		u.setContraseña(usuarioCrea);
-		
 		cliente.setUsuarioCreado(u);
 		cliente.setFechaCreacion(new Date());
 		cliente.setEliminado(false);

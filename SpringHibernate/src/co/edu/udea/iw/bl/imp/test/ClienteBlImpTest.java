@@ -27,7 +27,7 @@ public class ClienteBlImpTest {
 			String nombres = "federico";
 			String apellidos = "ocampo";
 			String email = "federico@federico.com";
-			String usuarioCreado = "elver";
+			String usuarioCreado = "elvr";
 			
 			clienteBl.crearCliente(cedula, nombres, apellidos, email, usuarioCreado);
 		} catch (MyDaoException | NullPointerException e) {
