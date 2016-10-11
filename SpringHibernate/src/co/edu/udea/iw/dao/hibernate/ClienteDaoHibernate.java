@@ -16,6 +16,14 @@ public class ClienteDaoHibernate implements ClienteDao {
 
 	private SessionFactory sessionFactory;
 
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
 	@Override
 	public List<Cliente> obtener() throws MyDaoException {
 		Session session = null;
@@ -23,7 +31,7 @@ public class ClienteDaoHibernate implements ClienteDao {
 		List<Cliente> resultado = null;
 
 		try {
-			session = sessionFactory.openSession();
+			session = getSessionFactory().openSession();
 
 			// El criteria se basa en la clase entrada como arg
 			Criteria crit = session.createCriteria(Cliente.class);
@@ -44,7 +52,7 @@ public class ClienteDaoHibernate implements ClienteDao {
 		Cliente cliente = null;
 
 		try {
-			session = sessionFactory.openSession();
+			session = getSessionFactory().openSession();
 
 			cliente = (Cliente) session.get(Cliente.class, cedula);
 
@@ -58,14 +66,12 @@ public class ClienteDaoHibernate implements ClienteDao {
 	@Override
 	public void guardar(Cliente cliente) throws MyDaoException {
 		Session session = null;
-		Transaction tx = null;
 
 		try {
-			session = sessionFactory.openSession();
+			session = getSessionFactory().openSession();
 			// guarda el objeto cliente en la base de datos
-			tx = session.beginTransaction();
+			// el tx.commit se quita para que se pueda hacer rollback
 			session.save(cliente);
-			tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);
@@ -83,12 +89,11 @@ public class ClienteDaoHibernate implements ClienteDao {
 		cliente.setCedula(cedula);
 
 		try {
-			session = sessionFactory.openSession();
+			session = getSessionFactory().openSession();
 			// elimina el objeto ciudad en la base de datos
 			// Solo busca por clave primaria.
 			tx = session.beginTransaction();
 			session.delete(cliente);
-			tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);
@@ -102,11 +107,10 @@ public class ClienteDaoHibernate implements ClienteDao {
 		Transaction tx = null;
 
 		try {
-			session = sessionFactory.openSession();
+			session = getSessionFactory().openSession();
 			// Actualiza el objeto cliente en la base de datos
 			tx = session.beginTransaction();
 			session.update(cliente);
-			tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);

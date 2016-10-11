@@ -1,6 +1,10 @@
 package co.edu.udea.iw.dao.hibernate;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+
+import org.hibernate.Transaction;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -22,7 +26,7 @@ public class UsuarioDaoHibernate implements UsuarioDao {
 		List<Usuario> resultado = null;
 		
 		try {
-			session = sessionFactory.openSession();
+			session = getSessionFactory().openSession();
 
 			// El criteria se basa en la clase entrada como arg
 			Criteria crit = session.createCriteria(Usuario.class);
@@ -42,7 +46,7 @@ public class UsuarioDaoHibernate implements UsuarioDao {
 		Usuario usuario = null;
 
 		try {
-			session = sessionFactory.openSession();
+			session = getSessionFactory().openSession();
 			/**session.get es la mejor forma de retornar un registro dada su PK
 			 * Si no existe el registro retorna un objeto null*/	
 			usuario = (Usuario) session.get(Usuario.class,login);
@@ -56,5 +60,14 @@ public class UsuarioDaoHibernate implements UsuarioDao {
 		}
 		return usuario;
 	}
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
 
 }

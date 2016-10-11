@@ -2,6 +2,11 @@ package co.edu.udea.iw.exception;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Gestiona los errores lanzados por los dao del sistema
+ * @author root
+ *
+ */
 public class MyDaoException extends Exception {
 	
 	Logger log = Logger.getLogger(this.getClass());

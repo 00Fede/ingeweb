@@ -21,7 +21,7 @@
 		<many-to-one name="ciudad" class="co.edu.udea.iw.dto.Ciudad">
 			<column name="Ciudad" precision="12"></column>
 		</many-to-one>
-		<property name="preferida" type="java.lang.boolean">
+		<property name="preferida" type="java.lang.Boolean">
 			<column name="Preferida"/>
 		</property>
 	</class>

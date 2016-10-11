@@ -21,6 +21,14 @@ public interface UsuarioDao {
 	 */
 	public List<Usuario> obtener() throws MyDaoException;
 	
+	/**
+	 * Obtiene un usuario cuyo login corresponda con el parametro
+	 * ingreasado
+	 * @param login: String a comparar con la bd
+	 * @return Usuario cuyo login es el param login
+	 * @throws MyDaoException
+	 */
 	public Usuario obtener(String login) throws MyDaoException;
+	
 
 }

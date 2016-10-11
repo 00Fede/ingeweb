@@ -6,7 +6,7 @@ public class Direccion {
 	private String direccion;
 	private String telefono;
 	private Ciudad ciudad;
-	private boolean preferida;
+	private Boolean preferida;
 	
 	
 	public DireccionId getDireccionId() {

@@ -6,18 +6,30 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+		
+	<context:property-placeholder location="classpath:database.properties" />
 
+<!-- 
+	<bean
+	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<property name="locations">
+		<value>classpath:database.properties</value>
+	</property>
+	</bean>
+	-->
 	<!-- Creación del datasource -->
 	<bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<!-- especifica propiedades del data source -->
 		<!-- Nombre de la clase del driver -->
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="driverClassName" value="${jdbc.driverClassName}"></property>
 		<!-- url de la database -->
-		<property name="url" value="jdbc:mysql://localhost:3306/clase"></property>
+		<property name="url" value="${jdbc.url}"></property>
 		<!-- credenciales de sesion -->
-		<property name="username" value="root"></property>
-		<property name="password" value="root"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
 	</bean>
+	
+	
 	
 	<!-- Creamos el session Factory -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -27,7 +39,7 @@
 		<list>
 			<value>co/edu/udea/iw/mapping/Ciudad.hbm.xml</value>
 			<value>co/edu/udea/iw/mapping/Cliente.hbm.xml</value>
-			<!--  <value>co/edu/udea/iw/mapping/Direccion.hbm.xml</value>-->
+			<value>co/edu/udea/iw/mapping/Direccion.hbm.xml</value>
 			<value>co/edu/udea/iw/mapping/Rol.hbm.xml</value>
 			<value>co/edu/udea/iw/mapping/Usuario.hbm.xml</value>
 		</list>
@@ -51,6 +63,26 @@
 	<bean id="ciudadDao" class="co.edu.udea.iw.dao.hibernate.CiudadDaoHibernate">
 	<!-- inyeccion de sessionFactory a ciudadDao -->
 	<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="clienteDao" class="co.edu.udea.iw.dao.hibernate.ClienteDaoHibernate">
+	<!-- inyeccion de sessionFactory a ciudadDao -->
+	<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="usuarioDao" class="co.edu.udea.iw.dao.hibernate.UsuarioDaoHibernate">
+	<property name="sessionFactory" ref="sessionFactory"></property>
+	
+	</bean>
+	
+	<bean id="usuarioBl" class="co.edu.udea.iw.bl.imp.UsuarioBlImp">
+		<property name="usuarioDao" ref="usuarioDao"></property>
+	</bean>
+	
+	<!-- id no debe ser igual a la clase. name debe ser del parametro del constructor -->
+	<bean id="clienteBl" class="co.edu.udea.iw.bl.imp.ClienteBlImp">
+		<constructor-arg name="clienteDao" ref="clienteDao"></constructor-arg>
+		<constructor-arg name="usuarioDao" ref="usuarioDao"></constructor-arg>
 	</bean>
 
 </beans>

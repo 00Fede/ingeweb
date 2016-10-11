@@ -11,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 
 import co.edu.udea.iw.dao.CiudadDao;
 import co.edu.udea.iw.dto.Ciudad;
+import co.edu.udea.iw.dto.Cliente;
 import co.edu.udea.iw.exception.MyDaoException;
 
 public class CiudadDaoHibernate implements CiudadDao {
@@ -24,7 +25,7 @@ public class CiudadDaoHibernate implements CiudadDao {
 		List<Ciudad> resultado = null;
 
 		try {
-			session = sessionFactory.openSession();
+			session = getSessionFactory().openSession();
 
 			// El criteria se basa en la clase entrada como arg
 			Criteria crit = session.createCriteria(Ciudad.class);
@@ -45,16 +46,13 @@ public class CiudadDaoHibernate implements CiudadDao {
 		Ciudad ciudad = null;
 
 		try {
-			session = sessionFactory.openSession();
+			
+			session = getSessionFactory().openSession();
 
-			// El criteria se basa en la clase entrada como arg
-			Criteria crit = session.createCriteria(Ciudad.class).add(Restrictions.eq("codigo", codigo));
-
-			ciudad = (Ciudad) crit.uniqueResult();
+			ciudad = (Ciudad) session.get(Ciudad.class, codigo);
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);
-
 		}
 		return ciudad;
 	}
@@ -65,11 +63,10 @@ public class CiudadDaoHibernate implements CiudadDao {
 		Transaction tx = null;
 
 		try {
-			session = sessionFactory.openSession();
+			session = getSessionFactory().openSession();
 			// guarda el objeto ciudad en la base de datos
 			tx = session.beginTransaction();
 			session.save(ciudad);
-			tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);
@@ -84,11 +81,10 @@ public class CiudadDaoHibernate implements CiudadDao {
 		Transaction tx = null;
 
 		try {
-			session = sessionFactory.openSession();
+			session = getSessionFactory().openSession();
 			// Actualiza el objeto ciudad en la base de datos
 			tx = session.beginTransaction();
 			session.update(ciudad);
-			tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);
@@ -105,12 +101,11 @@ public class CiudadDaoHibernate implements CiudadDao {
 		ciudad.setCodigo(codigo);
 
 		try {
-			session = sessionFactory.openSession();
+			session = getSessionFactory().openSession();
 			// elimina el objeto ciudad en la base de datos
 			// Solo busca por clave primaria.
 			tx = session.beginTransaction();
 			session.delete(ciudad);
-			tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);
