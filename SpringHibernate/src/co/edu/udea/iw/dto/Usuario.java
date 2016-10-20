@@ -5,7 +5,7 @@ public class Usuario {
 	private String login;
 	private String nombres;
 	private String apellidos;
-	private String contraseña;
+	private String contrasena;
 	private Rol rol;
 	
 
@@ -27,11 +27,11 @@ public class Usuario {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasena() {
+		return contrasena;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 	public Rol getRol() {
 		return rol;

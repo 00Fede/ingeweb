@@ -20,7 +20,7 @@ import co.edu.udea.iw.util.validations.Validaciones;
 
 public class ClienteBlImp implements ClienteBl {
 
-	// Es inyectado con toda la configuración de conexion a la bd
+	// Es inyectado con toda la configuraci��n de conexion a la bd
 	ClienteDao clienteDao;
 	UsuarioDao usuarioDao;
 	
@@ -67,7 +67,7 @@ public class ClienteBlImp implements ClienteBl {
 		cliente.setApellidos(apellidos);
 		cliente.setEmail(email);
 		Usuario u = new Usuario();
-		u.setContraseña(usuarioCrea);
+		u.setContrasena(usuarioCrea);
 		cliente.setUsuarioCreado(u);
 		cliente.setFechaCreacion(new Date());
 		cliente.setEliminado(false);

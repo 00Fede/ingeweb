@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/10/2016 07:21:49 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="co.edu.udea.iw.dto.Sancion" table="sancion">
+        <composite-id name="Id" class="co.edu.udea.iw.dto.PKCompuesta">
+            <key-property name="Fecha_inicio">
+            	<column name="fecha_ini"></column>
+            </key-property>
+            <key-many-to-one name="Id_dispositivo">
+            	<column name="id_dis"></column>
+            </key-many-to-one>
+            <key-many-to-one name="Id_cedula">
+            	<column name="id_ced"></column>
+            </key-many-to-one>
+        </composite-id>
+        <property name="Razon" type="java.lang.String">
+            <column name="razon" length="100" />
+        </property>
+        <property name="Tiempo_sancion" type="java.lang.String">
+            <column name="tiempo_sancion" length="50"/>
+        </property>
+    </class>
+</hibernate-mapping>
