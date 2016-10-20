@@ -1,0 +1,126 @@
+package co.edu.udea.iw.dao.hibernate.test;
+
+import static org.junit.Assert.*;
+
+import java.sql.Blob;
+import java.util.List;
+
+import javax.sql.rowset.serial.SerialBlob;
+
+import org.hibernate.HibernateException;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import co.edu.udea.iw.dao.ReservaDao;
+import co.edu.udea.iw.dto.Dispositivos;
+import co.edu.udea.iw.dto.Reserva;
+import co.edu.udea.iw.dto.Usuarios;
+import co.edu.udea.iw.exception.MyDaoException;
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath:configuracion.xml"})
+public class ReservaDaoHibernateTest {
+
+	@Autowired
+	ReservaDao dao;
+	@Test
+	public void testObtener() {
+		List<Reserva> reserva;
+		
+		try{
+			reserva = dao.obtener();
+			assertTrue(reserva.size() > 0);
+		}catch(MyDaoException e){
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}
+
+	@Test
+	public void testObtenerInt() {
+		Reserva reserva;
+		
+		try{
+			reserva=dao.obtener(103);
+			assertTrue(reserva != null);
+			
+		}catch(MyDaoException e){
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}
+
+	@Test
+	public void testGuardar() {
+		List<Reserva> reserva;
+		java.util.Date fechaActual = new java.util.Date(); //Fecha actual del sistema
+		Reserva reservas=new Reserva();
+		Dispositivos dispositivo=new Dispositivos();
+		dispositivo.setNumero_serie(1);
+		Usuarios user=new Usuarios();
+		user.setCedula(9);
+		reservas.setId_reserva(1);
+		reservas.setId_dispositivo(dispositivo);
+		reservas.setId_cedula(user);
+		reservas.setFecha_inicio(fechaActual);
+		reservas.setTiempo_reserva("3 horas");
+			
+		
+		try{
+			reserva = dao.obtener();
+			int num_user=reserva.size();
+			dao.guardar(reservas);
+			reserva = dao.obtener();
+			int num_user2=reserva.size();
+			assertTrue(num_user2>num_user);
+		}catch(MyDaoException e){
+			e.printStackTrace();
+			fail(e.getMessage());
+		}		
+	}
+
+	@Test
+	public void testEliminar() {
+		List<Reserva> reserva;
+		try{
+			
+			reserva = dao.obtener();
+			int num_user=reserva.size();
+			dao.eliminar(102);
+			reserva = dao.obtener();
+			int num_user2=reserva.size();
+			assertTrue(num_user2<num_user);
+		}catch(MyDaoException e){
+			e.printStackTrace();
+			fail(e.getMessage());
+		}	
+	}
+
+	@Test
+	public void testModificar() {
+		java.util.Date fechaActual = new java.util.Date(); //Fecha actual del sistema
+		Reserva reservas=new Reserva();
+		Dispositivos dispositivo=new Dispositivos();
+		dispositivo.setNumero_serie(1);
+		Usuarios user=new Usuarios();
+		user.setCedula(9);
+		reservas.setId_reserva(1);
+		reservas.setId_dispositivo(dispositivo);
+		reservas.setId_cedula(user);
+		reservas.setFecha_inicio(fechaActual);
+		reservas.setTiempo_reserva("4 horas");
+		try{
+			dao.modificar(reservas);
+			Reserva resultados=dao.obtener(reservas.getId_reserva());
+			assertTrue(resultados.getTiempo_reserva()!=reservas.getTiempo_reserva());
+		}catch(MyDaoException e){
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}
+
+}

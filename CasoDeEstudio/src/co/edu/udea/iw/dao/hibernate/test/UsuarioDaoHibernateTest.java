@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import co.edu.udea.iw.dao.UsuariosDao;
 import co.edu.udea.iw.dto.Dispositivos;
+import co.edu.udea.iw.dto.Reserva;
 import co.edu.udea.iw.dto.Usuarios;
 import co.edu.udea.iw.exception.MyDaoException;
 
@@ -54,7 +55,7 @@ public class UsuarioDaoHibernateTest {
 		
 		List<Usuarios> usuarios;
 		Usuarios user=new Usuarios();
-		user.setCedula(9);
+		user.setCedula(11);
 		user.setNombre("carlos");
 		user.setApellido("guerra");
 		user.setUsuario("cargue");
@@ -76,7 +77,22 @@ public class UsuarioDaoHibernateTest {
 
 	@Test
 	public void testModificar() {
-		assertTrue(true);
+		java.util.Date fechaActual = new java.util.Date(); //Fecha actual del sistema
+		Usuarios user=new Usuarios();
+		user.setCedula(11);
+		user.setNombre("carlos");
+		user.setApellido("guerra");
+		user.setUsuario("cargu");
+		user.setContrasena("gueguera");
+		user.setRol("investaaa");
+		try{
+			dao.modificar(user);
+			Usuarios resultados=dao.obtener(user.getCedula());
+			assertTrue(resultados.getRol()!=user.getRol());
+		}catch(MyDaoException e){
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
 	}
 
 	@Test

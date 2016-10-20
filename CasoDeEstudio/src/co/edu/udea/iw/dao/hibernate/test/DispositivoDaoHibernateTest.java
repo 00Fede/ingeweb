@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import co.edu.udea.iw.dao.DispositivosDao;
 import co.edu.udea.iw.dto.Dispositivos;
+import co.edu.udea.iw.dto.Reserva;
 import co.edu.udea.iw.dto.Usuarios;
 import co.edu.udea.iw.exception.MyDaoException;
 
@@ -57,12 +58,12 @@ public class DispositivoDaoHibernateTest {
 	@Test
 	public void testGuardar() throws SerialException, SQLException {
 		List<Dispositivos> dispositivo;
-		String carro="carro";
+		String carro="carros";
 		byte[] byteArray =carro.getBytes();
 		Blob blob = new SerialBlob(byteArray);
 		
 		Dispositivos disp=new Dispositivos();
-		disp.setNumero_serie(11);
+		disp.setNumero_serie(3);
 		disp.setNombre("ProtoBoard");
 		disp.setModelo("3.02");
 		disp.setDescripcion("Bacano");
@@ -104,8 +105,30 @@ public class DispositivoDaoHibernateTest {
 	}
 
 	@Test
-	public void testModificar() {
-		assertTrue(true);
+	public void testModificar() throws SerialException, SQLException {
+		
+		String carro="carro";
+		byte[] byteArray =carro.getBytes();
+		Blob blob = new SerialBlob(byteArray);
+		Dispositivos disp=new Dispositivos();
+		disp.setNumero_serie(3);
+		disp.setNombre("ProtoBoard");
+		disp.setModelo("3.02");
+		disp.setDescripcion("Bacano");
+		disp.setDisponibilidad("Prestamo");
+		disp.setEstado("Util");
+		disp.setFoto(blob);
+		disp.setObservacion("Perfecto estado");
+		disp.setRestriccion("allfucker");
+		
+		try{
+			dao.modificar(disp);
+			Dispositivos resultados=dao.obtener(disp.getNumero_serie());
+			assertTrue(resultados.getRestriccion()!=disp.getRestriccion());
+		}catch(MyDaoException e){
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
 	}
-
+	
 }

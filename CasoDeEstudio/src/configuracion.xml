@@ -35,6 +35,8 @@
 				<!-- La siguiente lista correspondera a los archivos de mapeo de cada uno de los pojos/entidades-->
 				<value>co/edu/udea/iw/mapping/Dispositivos.hbm.xml</value>
 				<value>co/edu/udea/iw/mapping/Usuarios.hbm.xml</value>
+				<value>co/edu/udea/iw/mapping/Reserva.hbm.xml</value>
+				<value>co/edu/udea/iw/mapping/Sancion.hbm.xml</value>
 			</list>
 		</property>
 		
@@ -65,6 +67,16 @@
 	
 	<!-- En este bean referenciaremos un session factory a neustro dao de usuario--> 
 	<bean name="dispositivoDao" class="co.edu.udea.iw.dao.hibernate.DispositivoDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- En este bean referenciaremos un session factory a neustro dao de usuario--> 
+	<bean name="reservaDao" class="co.edu.udea.iw.dao.hibernate.ReservaDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- En este bean referenciaremos un session factory a neustro dao de usuario--> 
+	<bean name="sancionDao" class="co.edu.udea.iw.dao.hibernate.SancionDaoHibernate">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	

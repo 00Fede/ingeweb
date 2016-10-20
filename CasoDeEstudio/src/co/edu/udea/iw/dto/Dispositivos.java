@@ -2,6 +2,9 @@ package co.edu.udea.iw.dto;
 
 import java.sql.Blob;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 public class Dispositivos {
 	
 	private int Numero_serie;
@@ -14,6 +17,8 @@ public class Dispositivos {
 	private String Disponibilidad;
 	private Blob foto;
 	
+	
+
 	public int getNumero_serie() {
 		return Numero_serie;
 	}
