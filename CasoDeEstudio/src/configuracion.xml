@@ -80,7 +80,11 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
-
+		<!-- En este bean referenciaremos un session factory a neustro dao de usuario--> 
+	<bean name="dispositivoBl" class="co.edu.udea.iw.bl_imp.DispositivoBlImp">
+		<constructor-arg name="dispDao" ref="dispositivoDao"></constructor-arg>
+		<constructor-arg name="usuarioDao" ref="usuariosDao"></constructor-arg>
+	</bean>
 	
 
 

@@ -63,7 +63,7 @@ public class DispositivoDaoHibernateTest {
 		Blob blob = new SerialBlob(byteArray);
 		
 		Dispositivos disp=new Dispositivos();
-		disp.setNumero_serie(3);
+		disp.setNumero_serie(6);
 		disp.setNombre("ProtoBoard");
 		disp.setModelo("3.02");
 		disp.setDescripcion("Bacano");

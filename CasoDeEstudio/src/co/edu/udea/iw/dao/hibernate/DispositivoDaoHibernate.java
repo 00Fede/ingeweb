@@ -8,12 +8,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.udea.iw.dao.DispositivosDao;
 import co.edu.udea.iw.dto.Dispositivos;
 import co.edu.udea.iw.dto.Usuarios;
 import co.edu.udea.iw.exception.MyDaoException;
 
+@Transactional
 public class DispositivoDaoHibernate implements DispositivosDao {
 
 	
@@ -76,7 +78,7 @@ private SessionFactory sessionFactory;
 
 
 		try {
-			session = session = sessionFactory.openSession();
+			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
 			session.save(dispositivo);
 			tx.commit();
@@ -98,7 +100,7 @@ private SessionFactory sessionFactory;
 
 		try {
 			
-			session = session = sessionFactory.openSession();
+			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
 			session.delete(dispositivo);
 			tx.commit();
@@ -119,10 +121,10 @@ private SessionFactory sessionFactory;
 
 
 		try {
-			session = session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			session = sessionFactory.openSession();
+			//tx = session.beginTransaction();
 			session.update(dispositivo);
-			tx.commit();
+			//tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);
