@@ -2,6 +2,7 @@ package co.edu.udea.iw.dto;
 
 public class Usuarios {
 	
+	public static final Object ADMIN_ROL = "administrador";
 	private int Cedula;
 	private String Nombre;
 	private String Apellido;
