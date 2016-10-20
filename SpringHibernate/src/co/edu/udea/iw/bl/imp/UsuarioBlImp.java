@@ -6,7 +6,7 @@ import co.edu.udea.iw.dto.Usuario;
 import co.edu.udea.iw.exception.MyDaoException;
 import co.edu.udea.iw.security.Cifrar;
 /**
- * Implementación de la interfaz UsuarioBl
+ * Implementacion de la interfaz UsuarioBl
  * @author root
  *
  */
@@ -25,8 +25,8 @@ public class UsuarioBlImp implements UsuarioBl {
 				Cifrar c = new Cifrar();
 				String encryptedPass = c.encrypt(password);
 				System.out.println("Pass login: "+encryptedPass);
-				System.out.println("Pass bd: " + user.getContraseña());			
-				if(user.getContraseña().equals(encryptedPass)){
+				System.out.println("Pass bd: " + user.getContrasena());			
+				if(user.getContrasena().equals(encryptedPass)){
 					resultado = true;
 					return resultado;
 				}
