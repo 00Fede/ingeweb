@@ -54,6 +54,14 @@ CREATE TABLE IF NOT EXISTS `sancion` (
   FOREIGN KEY (`id_ced`) REFERENCES usuarios(cedula)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `autenticacion` (
+  `id_autenticacion` int(12) NOT NULL AUTO_INCREMENT,
+  `id` int(12) NOT NULL,
+  `contrasena` varchar(50) NOT NULL,
+  `fecha_auth` date NOT NULL,
+  PRIMARY KEY (`id_autenticacion`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11;
+
 INSERT INTO dispositivo(`numero_unico_serie`,`nombre`,`modelo`,`descripcion`,
 `restriccion`,`observaciones`,`estado`,`foto`,`disponibilidad`)
 VALUES (123,'rayos x','RCT54','Lector de rayos x','no sacar de la instalacion',
