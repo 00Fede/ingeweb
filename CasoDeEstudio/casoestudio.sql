@@ -4,12 +4,12 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `cedula` int(12) NOT NULL ,
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
-  `usuario` varchar(50) NOT NULL UNIQUE,
+  `usuario` varchar(50) NOT NULL,
   `contrasena` varchar(50) NOT NULL,
   `rol` varchar(25) NOT NULL,
 `direccion` varchar(50) NOT NULL,
 `email` varchar(50) NOT NULL,
-`foto` longblob NOT NULL,
+`foto` longblob,
 `telefono` varchar(25) NOT NULL,
 `estado` varchar(25) NOT NULL,
   PRIMARY KEY (`cedula`)
@@ -19,9 +19,9 @@ CREATE TABLE IF NOT EXISTS `dispositivo` (
   `numero_unico_serie` int(12) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   `modelo` varchar(50) NOT NULL,
-  `descripcion` varchar(150) NOT NULL,
-  `restriccion` varchar(150) NOT NULL,
-  `observaciones` varchar(150) NOT NULL,
+  `descripcion` varchar(150),
+  `restriccion` varchar(150),
+  `observaciones` varchar(150),
   `estado` varchar(50) NOT NULL,
   `foto` longblob NOT NULL,
   `disponibilidad` varchar(25) NOT NULL,
@@ -32,11 +32,14 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   `id_reserva` int (12) NOT NULL,
   `id_disp` int(12) NOT NULL,
   `id_cedula` int(12) NOT NULL,
+  `id_responsable` int(12) NOT NULL,
   `fecha_inicio` date NOT NULL,
   `tiempo_reserva` varchar(50) NOT NULL,
   PRIMARY KEY (`id_reserva`),
   FOREIGN KEY (`id_disp`) REFERENCES dispositivo(numero_unico_serie),
-  FOREIGN KEY (`id_cedula`) REFERENCES usuarios(cedula)
+  FOREIGN KEY (`id_cedula`) REFERENCES usuarios(cedula),
+  FOREIGN KEY (`id_responsable`) REFERENCES usuarios(cedula)
+
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `sancion` (
@@ -74,4 +77,6 @@ INSERT INTO usuarios VALUES (1020,'Daniel','Dtorre','dtorre99','5baa61e4c9b93f3f
 'administrador','direccion3','daniel@laboratorio.com','3ab4','4440237','activo');
 INSERT INTO usuarios VALUES (1012,'Anibal','pelaez','investigador3','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8',
 'investigador','direccion4','anibal@laboratorio.com','3ab4','4440268','activo');
+INSERT INTO usuarios VALUES (777,'Soy','Superusuario','supersu','5baa61e4c9b93f3f068225645640b6cf8331b7ee68fd8',
+'superusuario','direccion7','superu@laboratorio.com','3ab4','7777777','activo');
 
