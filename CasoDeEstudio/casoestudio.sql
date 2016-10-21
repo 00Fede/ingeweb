@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `contrasena` varchar(50) NOT NULL,
   `rol` varchar(25) NOT NULL,
 `direccion` varchar(50) NOT NULL,
-`correo electronico` varchar(50) NOT NULL,
+`email` varchar(50) NOT NULL,
 `foto` longblob NOT NULL,
 `telefono` varchar(25) NOT NULL,
 `estado` varchar(25) NOT NULL,

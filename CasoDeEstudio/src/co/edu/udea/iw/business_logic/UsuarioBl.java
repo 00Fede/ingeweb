@@ -20,7 +20,7 @@ public interface UsuarioBl {
 	/**
 	 * FRQ-006- Registro de Administrador
 	 * 
-	 * @param cedulaResponsable cedula de quien va a registrar administrador
+	 * @param cedulaResponsable cedula de quien va a registrar administrador Obligatorio, obtenido por el sistema
 	 * @param cedula Obligatorio
 	 * @param nombreUsuario Obligatorio
 	 * @param contrasena Obligatorio
@@ -30,7 +30,7 @@ public interface UsuarioBl {
 	 * @param direccion Obligatorio
 	 * @throws MyDaoException
 	 */	
-	public boolean registrarAdministrador(int cedulaResponsable, int cedula, String nombreUsuario, String contrasena, String correo, 
+	public boolean registrarAdministrador(int cedulaResponsable, int cedula, String nombreUsuario, String contrasena, String nombre, 
 			byte[] fotoRAW, String telefono, String direccion) throws MyDaoException;
 	
 	/**

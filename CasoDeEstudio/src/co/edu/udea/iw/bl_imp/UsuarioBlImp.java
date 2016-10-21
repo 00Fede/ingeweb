@@ -3,15 +3,32 @@ package co.edu.udea.iw.bl_imp;
 import java.util.List;
 
 import co.edu.udea.iw.business_logic.UsuarioBl;
+import co.edu.udea.iw.dao.UsuariosDao;
 import co.edu.udea.iw.dto.Usuarios;
 import co.edu.udea.iw.exception.MyDaoException;
 
+/**
+ * @see UsuarioBlImp 
+ * @author Federico
+ *
+ */
 public class UsuarioBlImp implements UsuarioBl{
+	
+	UsuariosDao userDao;
+
+	/**
+	 * Constructor de implementación
+	 * @param userDao
+	 */
+	public UsuarioBlImp(UsuariosDao userDao) {
+		super();
+		this.userDao = userDao;
+	}
 
 	@Override
-	public boolean registrarAdministrador(String nombreUsuario, String contrasena, String correo, byte[] fotoRAW,
-			String telefono, String direccion) throws MyDaoException {
-		// TODO Auto-generated method stub
+	public boolean registrarAdministrador(int cedulaResponsable, int cedula, String nombreUsuario, String contrasena,
+			String correo, byte[] fotoRAW, String telefono, String direccion) throws MyDaoException {
+		
 		return false;
 	}
 
@@ -63,5 +80,6 @@ public class UsuarioBlImp implements UsuarioBl{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

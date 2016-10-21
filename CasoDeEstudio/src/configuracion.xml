@@ -86,6 +86,10 @@
 		<constructor-arg name="usuarioDao" ref="usuariosDao"></constructor-arg>
 	</bean>
 	
+	<bean name="usuarioBl" class="co.edu.udea.iw.bl_imp.UsuarioBlImp">
+		<constructor-arg name="userDao" ref="usuariosDao"></constructor-arg>
+	</bean>
+	
 
 
 </beans>
