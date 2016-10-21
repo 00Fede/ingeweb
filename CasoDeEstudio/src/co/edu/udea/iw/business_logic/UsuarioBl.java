@@ -1,6 +1,9 @@
 package co.edu.udea.iw.business_logic;
 
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialException;
 
 import co.edu.udea.iw.dto.Usuarios;
 import co.edu.udea.iw.exception.MyDaoException;
@@ -24,14 +27,18 @@ public interface UsuarioBl {
 	 * @param cedula Obligatorio
 	 * @param nombreUsuario Obligatorio
 	 * @param contrasena Obligatorio
+	 * @param nombre Obligatorio
+	 * @param apellido Obligatorio
 	 * @param correo Obligatorio
 	 * @param fotoRAW 
 	 * @param telefono Obligatorio
 	 * @param direccion Obligatorio
 	 * @throws MyDaoException
+	 * @throws SQLException 
+	 * @throws SerialException 
 	 */	
-	public boolean registrarAdministrador(int cedulaResponsable, int cedula, String nombreUsuario, String contrasena, String nombre, 
-			byte[] fotoRAW, String telefono, String direccion) throws MyDaoException;
+	public void registrarAdministrador(int cedulaResponsable, int cedula, String nombre, String apellido, 
+			String correo, String nombreUsuario, String contrasena, byte[] fotoRAW, String telefono, String direccion) throws MyDaoException, SerialException, SQLException;
 	
 	/**
 	 * FRQ-007- Eliminar  Administrador

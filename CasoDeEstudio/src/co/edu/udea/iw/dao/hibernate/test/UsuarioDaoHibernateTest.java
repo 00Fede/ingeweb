@@ -2,7 +2,11 @@ package co.edu.udea.iw.dao.hibernate.test;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,7 +55,7 @@ public class UsuarioDaoHibernateTest {
 	}
 
 	@Test
-	public void testGuardar() {
+	public void testGuardar() throws SerialException, SQLException {
 		
 		Usuarios user=new Usuarios();
 		user.setCedula(1016);
@@ -60,7 +64,12 @@ public class UsuarioDaoHibernateTest {
 		user.setUsuario("cargue");
 		user.setContrasena("gueguera");
 		user.setRol("invest");
-		
+		user.setDireccion("direccion42");
+		user.setEmail("corre1o@correo.com");
+		String u = "usuariog";
+		user.setFoto(new SerialBlob(u.getBytes()));
+		user.setTelefono("26783392");
+		user.setEstado("activo");
 		try{
 			dao.guardar(user);
 			assertTrue(dao.obtener(user.getCedula())!=null);
@@ -71,7 +80,7 @@ public class UsuarioDaoHibernateTest {
 	}
 
 	@Test
-	public void testModificar() {
+	public void testModificar() throws SerialException, SQLException {
 		java.util.Date fechaActual = new java.util.Date(); //Fecha actual del sistema
 		Usuarios user=new Usuarios();
 		user.setCedula(1012);
@@ -80,6 +89,12 @@ public class UsuarioDaoHibernateTest {
 		user.setUsuario("cargu");
 		user.setContrasena("gueguera");
 		user.setRol("investaaa");
+		user.setDireccion("direccion4");
+		user.setEmail("correo@correo.com");
+		String u = "usuario";
+		user.setFoto(new SerialBlob(u.getBytes()));
+		user.setTelefono("2678392");
+		user.setEstado("activo");
 		try{
 			dao.modificar(user);
 			Usuarios resultados=dao.obtener(user.getCedula());

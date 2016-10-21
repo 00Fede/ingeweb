@@ -56,7 +56,7 @@ public class UsuarioDaoHibernate implements UsuariosDao {
 		try{
 		session=sessionFactory.openSession();
 		
-		Criteria crit=session.createCriteria(Usuarios.class).add(Restrictions.eq("Cedula", cedula));
+		Criteria crit=session.createCriteria(Usuarios.class).add(Restrictions.eq("cedula", cedula));
 		resultado=(Usuarios)crit.uniqueResult();
 			
 		}catch(HibernateException e){
