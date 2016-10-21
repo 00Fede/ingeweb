@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `cedula` int(12) NOT NULL ,
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
-  `usuario` varchar(50) NOT NULL,
+  `usuario` varchar(50) NOT NULL UNIQUE,
   `contrasena` varchar(50) NOT NULL,
   `rol` varchar(25) NOT NULL,
 `direccion` varchar(50) NOT NULL,
