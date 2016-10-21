@@ -38,7 +38,7 @@ public class UsuarioDaoHibernateTest {
 	public void testObtenerInt() {
 		
 		Usuarios usuarios;
-		int cedula=8;
+		int cedula=1010;
 		
 		try{
 			usuarios=dao.obtener(cedula);
@@ -53,9 +53,8 @@ public class UsuarioDaoHibernateTest {
 	@Test
 	public void testGuardar() {
 		
-		List<Usuarios> usuarios;
 		Usuarios user=new Usuarios();
-		user.setCedula(11);
+		user.setCedula(1016);
 		user.setNombre("carlos");
 		user.setApellido("guerra");
 		user.setUsuario("cargue");
@@ -63,12 +62,8 @@ public class UsuarioDaoHibernateTest {
 		user.setRol("invest");
 		
 		try{
-			usuarios = dao.obtener();
-			int num_user=usuarios.size();
 			dao.guardar(user);
-			usuarios = dao.obtener();
-			int num_user2=usuarios.size();
-			assertTrue(num_user2>num_user);
+			assertTrue(dao.obtener(user.getCedula())!=null);
 		}catch(MyDaoException e){
 			e.printStackTrace();
 			fail(e.getMessage());
@@ -79,7 +74,7 @@ public class UsuarioDaoHibernateTest {
 	public void testModificar() {
 		java.util.Date fechaActual = new java.util.Date(); //Fecha actual del sistema
 		Usuarios user=new Usuarios();
-		user.setCedula(11);
+		user.setCedula(1012);
 		user.setNombre("carlos");
 		user.setApellido("guerra");
 		user.setUsuario("cargu");
@@ -97,16 +92,10 @@ public class UsuarioDaoHibernateTest {
 
 	@Test
 	public void testEliminar() {
-		List<Usuarios> usuarios;
 		
 		try{
-			
-			usuarios = dao.obtener();
-			int num_user=usuarios.size();
-			dao.eliminar(104);
-			usuarios = dao.obtener();
-			int num_user2=usuarios.size();
-			assertTrue(num_user2<num_user);
+			dao.eliminar(1016);
+			assertTrue(dao.obtener(1016)==null);
 		}catch(MyDaoException e){
 			e.printStackTrace();
 			fail(e.getMessage());

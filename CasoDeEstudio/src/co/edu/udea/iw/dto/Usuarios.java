@@ -1,5 +1,10 @@
 package co.edu.udea.iw.dto;
 
+/**
+ * Objeto que representara una entidad de usuario de la base de datos.
+ * @author root
+ *
+ */
 public class Usuarios {
 	
 	private int Cedula;

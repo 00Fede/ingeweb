@@ -20,15 +20,18 @@ public interface UsuarioBl {
 	/**
 	 * FRQ-006- Registro de Administrador
 	 * 
-	 * @param nombreUsuario
-	 * @param contrasena
-	 * @param correo
-	 * @param fotoRAW
-	 * @param telefono
-	 * @param direccion
+	 * @param cedulaResponsable cedula de quien va a registrar administrador
+	 * @param cedula Obligatorio
+	 * @param nombreUsuario Obligatorio
+	 * @param contrasena Obligatorio
+	 * @param correo Obligatorio
+	 * @param fotoRAW 
+	 * @param telefono Obligatorio
+	 * @param direccion Obligatorio
 	 * @throws MyDaoException
 	 */	
-	public boolean registrarAdministrador(String nombreUsuario, String contrasena, String correo, byte[] fotoRAW, String telefono, String direccion) throws MyDaoException;
+	public boolean registrarAdministrador(int cedulaResponsable, int cedula, String nombreUsuario, String contrasena, String correo, 
+			byte[] fotoRAW, String telefono, String direccion) throws MyDaoException;
 	
 	/**
 	 * FRQ-007- Eliminar  Administrador

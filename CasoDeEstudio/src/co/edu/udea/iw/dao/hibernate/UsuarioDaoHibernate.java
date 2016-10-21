@@ -68,7 +68,7 @@ public class UsuarioDaoHibernate implements UsuariosDao {
 	@Override
 	public void guardar(Usuarios usuario) throws MyDaoException {
 		Session session = null;
-		Transaction tx = null;
+		Transaction tx=null;
 
 
 		try {
@@ -87,15 +87,12 @@ public class UsuarioDaoHibernate implements UsuariosDao {
 	@Override
 	public void modificar(Usuarios usuario) throws MyDaoException {
 		Session session = null;
-		Transaction tx = null;
 
 
 		try {
 			session = session = sessionFactory.openSession();
 			//Actualiza el objeto ciudad en la base de datos
-			tx = session.beginTransaction();
 			session.update(usuario);
-			tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);
@@ -107,14 +104,14 @@ public class UsuarioDaoHibernate implements UsuariosDao {
 	@Override
 	public void eliminar(int cedula) throws MyDaoException {
 		Session session = null;
-		Transaction tx = null;
 		Usuarios usuario = new Usuarios();
+		Transaction tx = null;
 		usuario.setCedula(cedula);
 
 
 		try {
 			
-			session = session = sessionFactory.openSession();
+			session = sessionFactory.openSession();
 			//elimina el objeto ciudad en la base de datos
 			//Solo busca por clave primaria.
 			tx = session.beginTransaction();
