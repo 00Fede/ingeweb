@@ -7,6 +7,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,6 +54,27 @@ private SessionFactory sessionFactory;
 		return resultado;
 		
 
+	}
+	
+	@Override
+	public List<Dispositivos> obtenerDisponiblesPorModelo() throws MyDaoException {
+		
+		Session session=null;
+		List<Dispositivos> resultado=null;
+	
+
+		try{
+			session=sessionFactory.openSession();
+			
+			//Criteria crit=session.createCriteria(Dispositivos.class).setProjection(Projections.projectionList().add( Property.forName("Disponibilidad").as("1")).add(Projections.groupProperty("Modelo")));
+			
+			//resultado=crit.list();
+			
+		}catch(HibernateException e){
+			throw new MyDaoException(e);
+		}
+		
+		return resultado;
 	}
 
 	@Override
@@ -132,5 +156,7 @@ private SessionFactory sessionFactory;
 		}
 
 	}
+
+	
 
 }

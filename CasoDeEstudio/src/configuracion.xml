@@ -88,6 +88,8 @@
 	
 	<bean name="usuarioBl" class="co.edu.udea.iw.bl_imp.UsuarioBlImp">
 		<constructor-arg name="userDao" ref="usuariosDao"></constructor-arg>
+		<constructor-arg name="reservaDao" ref="reservaDao"></constructor-arg>
+		<constructor-arg name="sancionDao" ref="sancionDao"></constructor-arg>
 	</bean>
 	
 

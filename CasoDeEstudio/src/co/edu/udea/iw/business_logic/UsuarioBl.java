@@ -43,16 +43,18 @@ public interface UsuarioBl {
 	/**
 	 * FRQ-007- Eliminar  Administrador
 	 * 
-	 * @param idUsuario
-	 * @param justificacion
+	 * @param idUsuario - id de lo que se va a eliminar
+	 * @param justificacion 
+	 * @param idResponsable - id de quien hara eliminacion
 	 * @throws MyDaoException
 	 */	
-	public boolean eliminarAdministrador(int idUsuario, String justificacion) throws MyDaoException;
+	public void eliminarAdministrador(int idResponsable, int idUsuario, String justificacion) throws MyDaoException;
 	
 	/**
 	 * FRQ-015- Actualizaci��n de Informaci��n de usuario
 	 * 
 	 * @param idUsuario
+	 * @param idResponsable
 	 * @param nuevacontrasena
 	 * @param nuevoCorreo
 	 * @param nuevaFotoRAW
@@ -60,22 +62,24 @@ public interface UsuarioBl {
 	 * @param nuevaDireccion
 	 * @throws MyDaoException
 	 */	
-	public boolean actualizarInformacion(int idUsuario, String Nuevacontrasena, String NuevoCorreo, byte[] NuevafotoRAW, String NuevoTelefono, String nuevaDireccion) throws MyDaoException;
+	public void actualizarInformacion(int idResponsable, int idUsuario, String nuevaContrasena, 
+			String nuevoCorreo, byte[] nuevaFotoRAW, String nuevoTelefono, String nuevaDireccion) throws MyDaoException;
 	
 	/**
 	 * FRQ-007- Darse de baja logicamente * 
 	 * @param idUsuario
 	 * @throws MyDaoException	
 	 */	
-	public boolean darseDeBajaLogicamenteInvestigador(int idUsuario) throws MyDaoException;
+	public void darseDeBajaLogicamenteInvestigador(int idUsuario) throws MyDaoException;
 		
 	/**
 	 * FRQ-024- Eliminar investigador * 
-	 * @param idUsuario
+	 * @param idUsuario -- id de quien sera eliminado logicamente
+	 * @param idResponsable -- id de quien hara la eliminacion logica
 	 * @param justificacion
 	 * @throws MyDaoException	
 	 */	
-	public boolean eliminarInvestigador(int idUsuario, String justificacion) throws MyDaoException;
+	public void eliminarInvestigador(int idResponsable, int idUsuario, String justificacion) throws MyDaoException;
 	
 	/**
 	 * FRQ-026- Listar investigadores

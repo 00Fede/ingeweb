@@ -21,6 +21,13 @@ public interface DispositivosDao {
 	public List<Dispositivos> obtener() throws MyDaoException;
 	
 	/**
+	 * Entrega la lista de dispositivos de la bd  disponibles agrupados por modelo
+	 * @return
+	 * @throws MyDaoException
+	 */
+	public List<Dispositivos> obtenerDisponiblesPorModelo() throws MyDaoException;
+	
+	/**
 	 * Entrega un dispositivo con el numero de serie ingresado
 	 * @return 
 	 * @param no_serie   numero de serie del dispositivo 

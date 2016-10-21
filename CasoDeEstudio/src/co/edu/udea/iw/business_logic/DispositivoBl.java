@@ -26,6 +26,15 @@ public interface DispositivoBl {
 	public List<Dispositivos> verDispositivosPorModelo() throws MyDaoException;
 	
 	/**
+	 * FRQ-0003 - Ver todos los dispositivos disponibles
+	 * Permite al usuario visualizar todos los dispositivos disponibles 
+	 * agrupados por modelo
+	 * @return Lista de dispositivos agrupados por modelo
+	 * @throws MyDaoException
+	 */
+	public List<Dispositivos> verDispositivosDisponiblesPorModelo() throws MyDaoException;
+	
+	/**
 	 * FRQ-0004 - Agregar Dispositivo
 	 * Permite a un usuario administrador crear un dispositivo
 	 * @param nroSerie obligatorio
@@ -37,8 +46,8 @@ public interface DispositivoBl {
 	 * @param observacion
 	 * @throws MyDaoException, {@link SQLException, SerialException}
 	 */
-	public void agregarDispositivo(int nroSerie,String nombre, String modelo, String peqDesc,
-			byte[] fotoRAW,String restriccion, String observacion) throws MyDaoException, SerialException, SQLException;
+	public void agregarDispositivo(int nroSerie, String nombre, String modelo, String peqDesc, byte[] fotoRAW,
+			String restriccion, String observacion,String estado, String disponibilidad) throws MyDaoException, SerialException, SQLException;
 
 	/**
 	 * FRQ-0005 - Eliminar dispositivo
@@ -48,7 +57,7 @@ public interface DispositivoBl {
 	 * @param justificacion Razon de la eliminación
 	 * @throws MyDaoException
 	 */
-	public void eliminarDispositivo(int nroSerie, String justificacion) throws MyDaoException;
+	public void eliminarDispositivoLogicamente(int nroSerie, String justificacion) throws MyDaoException;
 	
 	/**
 	 * FRQ-0025 - Modificar dispositivo

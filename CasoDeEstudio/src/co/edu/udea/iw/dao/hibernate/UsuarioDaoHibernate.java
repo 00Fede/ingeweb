@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.udea.iw.dao.UsuariosDao;
 import co.edu.udea.iw.dto.Usuarios;

@@ -27,6 +27,7 @@ public class DispositivoBlImp implements DispositivoBl {
 
 	DispositivosDao dispDao;
 	UsuariosDao usuarioDao; // necesario para validar rol de usuario
+	private String disponible = "1";  // criterio de disponibilidad de dispositivo
 
 	/**
 	 * Constructor de la implementación. Necesario para inyecccion con Spring
@@ -73,7 +74,7 @@ public class DispositivoBlImp implements DispositivoBl {
 
 	@Override
 	public void agregarDispositivo(int nroSerie, String nombre, String modelo, String peqDesc, byte[] fotoRAW,
-			String restriccion, String observacion) throws MyDaoException, SerialException, SQLException {
+			String restriccion, String observacion,String estado, String disponibilidad) throws MyDaoException, SerialException, SQLException {
 		Usuarios usuarioConectado = null;
 		// usuarioConectado = usuarioDao.obtenerUsuarioConectado();
 		// valida si el usuario no esta conectado
@@ -103,22 +104,55 @@ public class DispositivoBlImp implements DispositivoBl {
 		newDisp.setFoto(foto);
 		newDisp.setRestriccion(restriccion);
 		newDisp.setObservacion(observacion);
+		newDisp.setEstado(estado);
+		newDisp.setDisponibilidad(disponibilidad);
 		
 		dispDao.guardar(newDisp);
 		
 	}
 
 	@Override
-	public void eliminarDispositivo(int nroSerie, String justificacion) throws MyDaoException {
-		// TODO Auto-generated method stub
+	public void eliminarDispositivoLogicamente(int nroSerie, String justificacion) throws MyDaoException {
+		Dispositivos dispositivo= null;
+		
+		
 
 	}
 
 	@Override
 	public void modificarDispositivo(int nroSerie, String nombre, String modelo, String peqDesc, byte[] fotoRAW,
 			String restriccion, String observacion, String justificacion) throws MyDaoException {
-		// TODO Auto-generated method stub
+		
+		
 
+	}
+
+	@Override
+	public List<Dispositivos> verDispositivosDisponiblesPorModelo() throws MyDaoException {
+		Usuarios usuarioConectado = null;
+		List<Dispositivos> dispList = null;
+		List<Dispositivos> listDispModelo = null;
+		
+		dispList = dispDao.obtener();
+
+		if (dispList.isEmpty()) {
+			throw new MyDaoException("No existen dispositivos para mostrar", null);
+		}
+
+		Iterator<Dispositivos> iteList = dispList.iterator();
+		ArrayList<String> models = new ArrayList<>();
+		listDispModelo = new ArrayList<>();
+		while (iteList.hasNext()) {
+			Dispositivos disp = iteList.next();
+			String model = disp.getModelo();
+			String disponibl = disp.getDisponibilidad();
+			if ((!models.contains(model)) && disponibl.equals(disponible)) {
+				models.add(model);
+				listDispModelo.add(disp);
+			}
+		}
+
+		return listDispModelo;
 	}
 
 }
