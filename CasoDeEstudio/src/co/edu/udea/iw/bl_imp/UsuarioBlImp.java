@@ -31,6 +31,7 @@ import co.edu.udea.iw.util.validations.Validaciones;
  */
 public class UsuarioBlImp implements UsuarioBl {
 
+	private static final String CAPTCHA_CODE = "n3ur0";
 	UsuariosDao userDao;
 	ReservaDao reservaDao;
 	SancionDao sancionDao;
@@ -140,13 +141,7 @@ public class UsuarioBlImp implements UsuarioBl {
 		userDao.modificar(olduser);
 	}
 
-	private boolean matchRol(int idResponsable, String rol) throws MyDaoException {
-		Usuarios userResponsable = userDao.obtener(idResponsable);
-		if (userResponsable.getRol().equals(rol)) {
-			return true;
-		}
-		return false;
-	}
+	
 
 	@Override
 	public void actualizarInformacion(int idResponsable, int idUsuario, String nuevaContrasena, String nuevoCorreo,
@@ -186,6 +181,12 @@ public class UsuarioBlImp implements UsuarioBl {
 
 	}
 
+	/**
+	 * Verifica si el email ingresado ya existe en la bd
+	 * @param email
+	 * @return true si usuario ya existe en bd, false en caso contrario
+	 * @throws MyDaoException
+	 */
 	private boolean existeEmail(String email) throws MyDaoException {
 		List<Usuarios> users = userDao.obtener();
 		Iterator<Usuarios> i = users.iterator();
@@ -196,7 +197,13 @@ public class UsuarioBlImp implements UsuarioBl {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Verifica que usuario del id ingresado tiene estado activo
+	 * @param id
+	 * @return true si usuario tiene estado activo, false en caso contrario
+	 * @throws MyDaoException
+	 */
 	private boolean isActiveUser(int id) throws MyDaoException {
 		Usuarios userResponsable = userDao.obtener(id);
 		if (userResponsable.getEstado().equals("inactivo")) {
@@ -204,7 +211,12 @@ public class UsuarioBlImp implements UsuarioBl {
 		}
 		return true;
 	}
-
+	/**
+	 * Revisa si el usuario del id tiene reservas asociadas
+	 * @param id
+	 * @return true si tiene reservas asociadas, false en caso contrario
+	 * @throws MyDaoException
+	 */
 	private boolean hasActiveReserves(int id) throws MyDaoException {
 		List<Reserva> r = reservaDao.obtener();
 		Iterator<Reserva> i = r.iterator();
@@ -215,7 +227,12 @@ public class UsuarioBlImp implements UsuarioBl {
 		}
 		return false;
 	}
-
+	/**
+	 * Revisa si el usuario del id tiene sanciones asociadas
+	 * @param id
+	 * @return true si tiene sanciones asociadas, false en caso contrario
+	 * @throws MyDaoException
+	 */
 	private boolean hasActiveSanctions(int id) throws MyDaoException {
 		List<Sancion> s = sancionDao.obtener();
 		Iterator<Sancion> i = s.iterator();
@@ -227,6 +244,21 @@ public class UsuarioBlImp implements UsuarioBl {
 		return false;
 	}
 
+	/**
+	 * Revisa si el usuario con cedula idResponsable, es del rol rol
+	 * @param id
+	 * @param rol
+	 * @return
+	 * @throws MyDaoException
+	 */
+	private boolean matchRol(int id, String rol) throws MyDaoException {
+		Usuarios userResponsable = userDao.obtener(id);
+		if (userResponsable.getRol().equals(rol)) {
+			return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * Revisa si existe por lo menos un investigador en el sistema
 	 * 
@@ -287,6 +319,18 @@ public class UsuarioBlImp implements UsuarioBl {
 
 	@Override
 	public void eliminarInvestigador(int idResponsable, int idUsuario, String justificacion) throws MyDaoException {
+		if (idResponsable == 0) {
+			throw new MyDaoException("Debe especificar cedula de responsable.", null);
+		}
+		if (!userExist(idResponsable)) {
+			throw new MyDaoException("El usuario responsable no existe", null);
+		}
+		if (idUsuario == 0) {
+			throw new MyDaoException("Debe especificar cedula de usuario.", null);
+		}
+		if (!userExist(idUsuario)) {
+			throw new MyDaoException("El usuario a eliminar no existe", null);
+		}
 		if (!isActiveUser(idUsuario)) {
 			throw new MyDaoException("El usuario ya fue eliminado", null);
 		}
@@ -338,7 +382,7 @@ public class UsuarioBlImp implements UsuarioBl {
 	}
 
 	@Override
-	public boolean login(int cedula, String contrasena) throws MyDaoException {
+	public boolean login(int cedula, String contrasena, String captcha) throws MyDaoException {
 		boolean resultado = false;
 		if (cedula == 0) {
 			throw new MyDaoException("Debe especificar cedula.", null);
@@ -351,6 +395,12 @@ public class UsuarioBlImp implements UsuarioBl {
 		}
 		if (!isActiveUser(cedula)) {
 			throw new MyDaoException("El usuario no se encuentra activo.", null);
+		}
+		if(captcha == null || "".equals(captcha)){
+			throw new MyDaoException("Debe ingresar el texto del captcha", null);
+		}
+		if(!captcha.equals(CAPTCHA_CODE)){
+			throw new MyDaoException("Debe ingresar correctamente el captcha", null);
 		}
 		Usuarios user = userDao.obtener(cedula);
 		Cifrar c = new Cifrar();

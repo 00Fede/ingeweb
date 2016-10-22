@@ -35,7 +35,6 @@ public class DispositivoBlImpTest {
 			int nroSerie = 123;
 			
 			dispBl.agregarDispositivo(nroSerie, nombre, modelo,descripcion, fotodata, restriccion, observacion,estado,disponibilidad);
-			//assertTrue(true);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -57,7 +56,7 @@ public class DispositivoBlImpTest {
 		try {
 			List<Dispositivos> dispPorModelo;
 			dispPorModelo = dispBl.verDispositivosDisponiblesPorModelo();
-			assertTrue(dispPorModelo.size() == 2 );
+			assertTrue(dispPorModelo.size() >= 2 );
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}

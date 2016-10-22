@@ -42,7 +42,6 @@ public class DispositivoBlImp implements DispositivoBl {
 
 	@Override
 	public List<Dispositivos> verDispositivosPorModelo() throws MyDaoException {
-		Usuarios usuarioConectado = null;
 		List<Dispositivos> dispList = null;
 		List<Dispositivos> listDispModelo = null;
 		// usuarioConectado = usuarioDao.obtenerUsuarioConectado();
@@ -75,7 +74,6 @@ public class DispositivoBlImp implements DispositivoBl {
 	@Override
 	public void agregarDispositivo(int nroSerie, String nombre, String modelo, String peqDesc, byte[] fotoRAW,
 			String restriccion, String observacion,String estado, String disponibilidad) throws MyDaoException, SerialException, SQLException {
-		Usuarios usuarioConectado = null;
 		// usuarioConectado = usuarioDao.obtenerUsuarioConectado();
 		// valida si el usuario no esta conectado
 		//if (usuarioConectado.equals(null)) {
@@ -113,7 +111,6 @@ public class DispositivoBlImp implements DispositivoBl {
 
 	@Override
 	public void eliminarDispositivoLogicamente(int nroSerie, String justificacion) throws MyDaoException {
-		Dispositivos dispositivo= null;
 		
 		
 
@@ -129,7 +126,6 @@ public class DispositivoBlImp implements DispositivoBl {
 
 	@Override
 	public List<Dispositivos> verDispositivosDisponiblesPorModelo() throws MyDaoException {
-		Usuarios usuarioConectado = null;
 		List<Dispositivos> dispList = null;
 		List<Dispositivos> listDispModelo = null;
 		
@@ -146,7 +142,7 @@ public class DispositivoBlImp implements DispositivoBl {
 			Dispositivos disp = iteList.next();
 			String model = disp.getModelo();
 			String disponibl = disp.getDisponibilidad();
-			if ((!models.contains(model)) && disponibl.equals(disponible)) {
+			if (!models.contains(model) && disponibl.equals(disponible)) {
 				models.add(model);
 				listDispModelo.add(disp);
 			}

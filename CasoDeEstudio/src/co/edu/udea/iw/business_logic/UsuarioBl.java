@@ -93,10 +93,11 @@ public interface UsuarioBl {
 	 * FRQ-0027- Iniciar sesion
 	 * @param cedula 
 	 * @param contrasena
+	 * @param captcha - para evitar robots
 	 * @return  true si el login es exitoso, false de lo contrario.
 	 * @throws MyDaoException	
 	 */	
-	public boolean login(int cedula, String contrasena) throws MyDaoException;
+	public boolean login(int cedula, String contrasena, String captcha) throws MyDaoException;
 	
 	/**
 	 * FRQ-028- Cerrar sesi��n

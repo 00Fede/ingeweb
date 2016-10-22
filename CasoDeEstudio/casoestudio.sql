@@ -79,6 +79,11 @@ INSERT INTO dispositivo(`numero_unico_serie`,`nombre`,`modelo`,`descripcion`,
 VALUES (555,'generador de ondas','OND123','genera ondaz 10-100hz','No usar cerca a otros generadores',
 'utilizar protecto','AGOTADO','c48b','baja');
 
+INSERT INTO dispositivo(`numero_unico_serie`,`nombre`,`modelo`,`descripcion`,
+`restriccion`,`observaciones`,`estado`,`foto`,`disponibilidad`)
+VALUES (552,'generador de ondas','OND123','genera ondaz 10-100hz','No usar cerca a otros generadores',
+'utilizar protecto','AGOTADO','c48b','baja');
+
 INSERT INTO usuarios VALUES (1039,'Federico','Ocampo Ortiz','fedo','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8',
 'administrador','direccion1','federico@laboratorio.com','3ab4','4440238','activo');
 INSERT INTO usuarios VALUES (1010,'Andres','Felipe','anfe','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8',

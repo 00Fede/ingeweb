@@ -65,9 +65,10 @@ public class UsuarioBlImpTest {
 	public void testLogin(){
 		int cedula = 10189;
 		String contrasena = "gueuhuig";
+		String captcha = "n3ur0";
 		
 		try {
-			assertTrue(userBl.login(cedula, contrasena));
+			assertTrue(userBl.login(cedula, contrasena,captcha));
 		} catch (MyDaoException e) {
 			e.printStackTrace();
 			fail(e.getMessage());
@@ -94,11 +95,27 @@ public class UsuarioBlImpTest {
 	}
 	@Test
 	public void testEliminarInvestigador(){
+		int idResponsable = 1020;
+		int idUsuario = 1010;
+		String justificacion = "justificacion si";
+		try {
+			userBl.eliminarInvestigador(idResponsable, idUsuario, justificacion);
+		} catch (MyDaoException e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
 		
 	}
 	@Test
 	public void testListarInvestigador(){
-		
+		int idResponsable = 1020;
+		try {
+			assertTrue(userBl.listarInvestigadores(idResponsable)!=null);
+		} catch (MyDaoException e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+				
 	}
 	
 
