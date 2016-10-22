@@ -14,9 +14,10 @@ public class Sancion {
 	private int Id_sancion;
 	private Dispositivos Id_dispositivo;
 	private Usuarios Id_cedula;
+	private Usuarios Id_responsable;
 	private Date Fecha_inicio;
 	private String Razon;
-	private String Tiempo_sancion;
+	private int Tiempo_sancion;
 	
 	public int getId_sancion() {
 		return Id_sancion;
@@ -36,6 +37,12 @@ public class Sancion {
 	public void setId_cedula(Usuarios id_cedula) {
 		Id_cedula = id_cedula;
 	}
+	public Usuarios getId_responsable() {
+		return Id_responsable;
+	}
+	public void setId_responsable(Usuarios id_responsables) {
+		Id_responsable = id_responsables;
+	}
 	public Date getFecha_inicio() {
 		return Fecha_inicio;
 	}
@@ -48,12 +55,13 @@ public class Sancion {
 	public void setRazon(String razon) {
 		Razon = razon;
 	}
-	public String getTiempo_sancion() {
+	public int getTiempo_sancion() {
 		return Tiempo_sancion;
 	}
-	public void setTiempo_sancion(String tiempo_sancion) {
+	public void setTiempo_sancion(int tiempo_sancion) {
 		Tiempo_sancion = tiempo_sancion;
 	}
+	
 	
 	
 }

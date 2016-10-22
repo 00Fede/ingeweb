@@ -15,11 +15,14 @@ import java.util.Date;
 
 public class Reserva {
 	
-	private int Id_reserva;
 	private Dispositivos Id_dispositivo;
 	private Usuarios Id_cedula;
+	private Usuarios Id_responsable;
 	private Date Fecha_inicio;
-	private String Tiempo_reserva;
+	private int Tiempo_reserva;
+	private int estado;
+	
+	private int Id_reserva;
 	public int getId_reserva() {
 		return Id_reserva;
 	}
@@ -38,18 +41,32 @@ public class Reserva {
 	public void setId_cedula(Usuarios id_cedula) {
 		Id_cedula = id_cedula;
 	}
+	public Usuarios getId_responsable() {
+		return Id_responsable;
+	}
+	public void setId_responsable(Usuarios id_responsable) {
+		Id_responsable = id_responsable;
+	}
 	public Date getFecha_inicio() {
 		return Fecha_inicio;
 	}
 	public void setFecha_inicio(Date fecha_inicio) {
 		Fecha_inicio = fecha_inicio;
 	}
-	public String getTiempo_reserva() {
+	public int getTiempo_reserva() {
 		return Tiempo_reserva;
 	}
-	public void setTiempo_reserva(String tiempo_reserva) {
+	public void setTiempo_reserva(int tiempo_reserva) {
 		Tiempo_reserva = tiempo_reserva;
 	}
+	public int getEstado() {
+		return estado;
+	}
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+	
+	
 	
 	
 	

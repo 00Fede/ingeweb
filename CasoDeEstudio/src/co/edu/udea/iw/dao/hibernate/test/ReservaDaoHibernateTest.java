@@ -45,7 +45,7 @@ public class ReservaDaoHibernateTest {
 		Reserva reserva;
 		
 		try{
-			reserva=dao.obtener(103);
+			reserva=dao.obtener(9988);
 			assertTrue(reserva != null);
 			
 		}catch(MyDaoException e){
@@ -60,15 +60,16 @@ public class ReservaDaoHibernateTest {
 		java.util.Date fechaActual = new java.util.Date(); //Fecha actual del sistema
 		Reserva reservas=new Reserva();
 		Dispositivos dispositivo=new Dispositivos();
-		dispositivo.setNumero_serie(1);
+		dispositivo.setNumero_serie(6);
 		Usuarios user=new Usuarios();
-		user.setCedula(9);
-		reservas.setId_reserva(1);
+		user.setCedula(1012);
+		reservas.setId_reserva(102);
 		reservas.setId_dispositivo(dispositivo);
 		reservas.setId_cedula(user);
+		reservas.setId_responsable(user);
 		reservas.setFecha_inicio(fechaActual);
-		reservas.setTiempo_reserva("3 horas");
-			
+		reservas.setTiempo_reserva(3);
+		reservas.setEstado(0);
 		
 		try{
 			reserva = dao.obtener();
@@ -108,11 +109,13 @@ public class ReservaDaoHibernateTest {
 		dispositivo.setNumero_serie(1);
 		Usuarios user=new Usuarios();
 		user.setCedula(9);
-		reservas.setId_reserva(1);
+		reservas.setId_reserva(9988);
 		reservas.setId_dispositivo(dispositivo);
 		reservas.setId_cedula(user);
+		reservas.setId_responsable(user);
 		reservas.setFecha_inicio(fechaActual);
-		reservas.setTiempo_reserva("4 horas");
+		reservas.setTiempo_reserva(4);
+		reservas.setEstado(0);
 		try{
 			dao.modificar(reservas);
 			Reserva resultados=dao.obtener(reservas.getId_reserva());

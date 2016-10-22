@@ -42,7 +42,7 @@ public class SancionDaoHibernateTest {
 		Sancion sancion;
 		
 		try{
-			sancion=dao.obtener(1);
+			sancion=dao.obtener(8899);
 			assertTrue(sancion != null);
 			
 		}catch(MyDaoException e){
@@ -51,10 +51,7 @@ public class SancionDaoHibernateTest {
 		}
 	}
 
-	@Test
-	public void testEliminar() {
-		fail("Not yet implemented");
-	}
+
 
 	@Test
 	public void testGuardar() {
@@ -62,15 +59,16 @@ public class SancionDaoHibernateTest {
 		java.util.Date fechaActual = new java.util.Date(); //Fecha actual del sistema
 		Sancion sancion=new Sancion();
 		Dispositivos dispositivo=new Dispositivos();
-		dispositivo.setNumero_serie(1);
+		dispositivo.setNumero_serie(6);
 		Usuarios user=new Usuarios();
-		user.setCedula(9);
-		sancion.setId_sancion(3);
+		user.setCedula(1012);
+		sancion.setId_sancion(386);
 		sancion.setId_cedula(user);
 		sancion.setId_dispositivo(dispositivo);
+		sancion.setId_responsable(user);
 		sancion.setFecha_inicio(fechaActual);
 		sancion.setRazon("oh yeahhh");
-		sancion.setTiempo_sancion("all life");
+		sancion.setTiempo_sancion(1);
 		
 			
 		
@@ -85,6 +83,23 @@ public class SancionDaoHibernateTest {
 			e.printStackTrace();
 			fail(e.getMessage());
 		}		
+	}
+	
+	@Test
+	public void testEliminar() {
+		List<Sancion> sancion;
+		try{
+			
+			sancion = dao.obtener();
+			int num_user=sancion.size();
+			dao.eliminar(386);
+			sancion = dao.obtener();
+			int num_user2=sancion.size();
+			assertTrue(num_user2<num_user);
+		}catch(MyDaoException e){
+			e.printStackTrace();
+			fail(e.getMessage());
+		}	
 	}
 
 	@Test

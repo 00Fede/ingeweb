@@ -24,7 +24,7 @@ public interface ReservaBl {
 	 * @param fecha
 	 * @throws MyDaoException
 	 */
-	public void cancelarReserva(int id,Date fecha) throws MyDaoException;
+	public void cancelarReserva(int id) throws MyDaoException;
 	
 	
 	/**
@@ -37,6 +37,6 @@ public interface ReservaBl {
 	 * @param fecha
 	 * @throws MyDaoException
 	 */
-	public void modificarReserva(int id,String Tiempo,String id_disp,Date fecha) throws MyDaoException;
+	public void modificarReserva(int id,int Tiempo,int id_disp) throws MyDaoException;
 	
 }

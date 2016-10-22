@@ -25,28 +25,53 @@ public class ReservaBlImp implements ReservaBl {
 	}
 	
 	@Override
-	public void cancelarReserva(int id,Date date) throws MyDaoException {
+	public void cancelarReserva(int id) throws MyDaoException {
+		
+
+		if(id == 0){
+			throw new MyDaoException("El identificador ingresado no es valido", null);
+		}
 		
 		Reserva reserva=new Reserva();
 		reserva=reservaDao.obtener(id);
 		
-		Date dateReserva=reserva.getFecha_inicio();
-		int init_time=dateReserva.getHours();
-		int now_time=date.getHours();
-		String tiempo=reserva.getTiempo_reserva();
+		if(reserva == null){
+			throw new MyDaoException("La reserva no se ha encontrado", null);
+		}
+		//Para que el usuario pueda cancelar una reserva inicialmente
+		//aun debera ser reserva por ende estado será 0
 		
-		//if(now_time>init_time+tiempo){
-			//Usuario ha sobrepasado el limite de horas no puede cancelar
-		//}
+		if(reserva.getEstado() != 0){ //aun es reserva
+			
+			throw new MyDaoException("Esta entidad no tiene estado de reserva", null);
+		}
+		//es diferente de reserva, es decir o ya esta en prestemo activo o inactivo o en cancelado
 		
-		
+		if(reserva.getEstado() == 0){
+			// Se elimina la reserva con el id entrado
+			reservaDao.eliminar(id);
+		}
 
 	}
 
 	@Override
-	public void modificarReserva(int id, String Tiempo, String id_disp, Date fecha) throws MyDaoException {
+	public void modificarReserva(int id, int Tiempo, int id_disp) throws MyDaoException {
+		if(id == 0){
+			throw new MyDaoException("El identificador ingresado no es valido", null);
+		}
 		
-
+		if(Tiempo == 0){
+			throw new MyDaoException("Debe especfiicar el tiempo de sancion", null);
+		}
+		
+		if(id_disp == 0){
+			throw new MyDaoException("El identificador ingresado no es valido", null);
+		}
+		
+		Reserva reserva;
+		reserva=reservaDao.obtener(id);
+		reserva.setTiempo_reserva(Tiempo);
+		
 	}
 
 }
