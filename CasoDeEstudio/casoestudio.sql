@@ -90,8 +90,8 @@ INSERT INTO usuarios VALUES (1012,'Anibal','pelaez','investigador3','5baa61e4c9b
 INSERT INTO usuarios VALUES (777,'Soy','Superusuario','supersu','5baa61e4c9b93f3f068225645640b6cf8331b7ee68fd8',
 'superusuario','direccion7','superu@laboratorio.com','3ab4','7777777','activo');
 
-INSERT INTO sancion VALUES (8899,333,1012,'2016-10-40','limite de tiempo','72');
+INSERT INTO sancion VALUES (8899,333,1012,1039,'2016-10-20','limite de tiempo','72');
 
-INSERT INTO reserva VALUES (9988,333,1012,'1020','2016-10-18','72');
+INSERT INTO reserva VALUES (9988,333,1012,1039,'2016-10-18','72',0);
 
 
