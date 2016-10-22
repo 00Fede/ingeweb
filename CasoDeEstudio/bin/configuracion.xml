@@ -37,6 +37,7 @@
 				<value>co/edu/udea/iw/mapping/Usuarios.hbm.xml</value>
 				<value>co/edu/udea/iw/mapping/Reserva.hbm.xml</value>
 				<value>co/edu/udea/iw/mapping/Sancion.hbm.xml</value>
+				<value>co/edu/udea/iw/mapping/Autenticacion.hbm.xml</value>
 			</list>
 		</property>
 		
@@ -80,6 +81,10 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
+	<bean name="authDao" class="co.edu.udea.iw.dao.hibernate.AuthDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
 		<!-- En este bean referenciaremos un session factory a neustro dao de usuario--> 
 	<bean name="dispositivoBl" class="co.edu.udea.iw.bl_imp.DispositivoBlImp">
 		<constructor-arg name="dispDao" ref="dispositivoDao"></constructor-arg>
@@ -90,6 +95,7 @@
 		<constructor-arg name="userDao" ref="usuariosDao"></constructor-arg>
 		<constructor-arg name="reservaDao" ref="reservaDao"></constructor-arg>
 		<constructor-arg name="sancionDao" ref="sancionDao"></constructor-arg>
+		<constructor-arg name="authDao" ref="authDao"></constructor-arg>
 	</bean>
 	
 	<bean name="reservaBl" class="co.edu.udea.iw.bl_imp.ReservaBlImp">

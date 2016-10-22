@@ -87,30 +87,23 @@ public interface UsuarioBl {
 	 * @return list<Usuarios>
 	 * @throws MyDaoException	
 	 */	
-	public List<Usuarios> listarInvestigadores() throws MyDaoException;
+	public List<Usuarios> listarInvestigadores(int idResponsable) throws MyDaoException;
 	
 	/**
-	 * FRQ-0027- Iniciar sesi��n
-	 * @param nombreUsuario
+	 * FRQ-0027- Iniciar sesion
+	 * @param cedula 
 	 * @param contrasena
 	 * @return  true si el login es exitoso, false de lo contrario.
 	 * @throws MyDaoException	
 	 */	
-	public boolean login(String nombreUsuario, String contrasena) throws MyDaoException;
+	public boolean login(int cedula, String contrasena) throws MyDaoException;
 	
 	/**
 	 * FRQ-028- Cerrar sesi��n
-	 * @param nombreUsuario
-	 * @param contrasena
-	 * @return  true si se cierra sesion exitosamente, false de lo contrario.
+	 * @param cedula - cedula de quien va a cerrar sesion.
 	 * @throws MyDaoException	
 	 */	
-	public boolean cerrarSesion() throws MyDaoException;
+	public void cerrarSesion(int cedula) throws MyDaoException;
 	
-	/**
-	 * FRQ-0-032- Cerrar sesi��n
-	 * @throws MyDaoException	
-	 */		
-	public Usuarios obtenerUsuarioConectado() throws MyDaoException;
  
 }
