@@ -15,6 +15,10 @@ import co.edu.udea.iw.dao.ReservaDao;
 import co.edu.udea.iw.dto.Reserva;
 import co.edu.udea.iw.exception.MyDaoException;
 
+/*
+ * @see ReservaDao
+ * @author andres montoya
+ */
 public class ReservaDaoHibernate implements ReservaDao {
 
 	private SessionFactory sessionFactory;

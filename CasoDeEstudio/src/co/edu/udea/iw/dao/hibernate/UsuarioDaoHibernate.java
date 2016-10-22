@@ -14,6 +14,10 @@ import co.edu.udea.iw.dao.UsuariosDao;
 import co.edu.udea.iw.dto.Usuarios;
 import co.edu.udea.iw.exception.MyDaoException;
 
+/**
+ * see UsuariosDao
+ * @author andres montoya
+ */
 public class UsuarioDaoHibernate implements UsuariosDao {
 	
 	private SessionFactory sessionFactory;

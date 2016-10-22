@@ -14,6 +14,10 @@ import co.edu.udea.iw.dto.Reserva;
 import co.edu.udea.iw.dto.Sancion;
 import co.edu.udea.iw.exception.MyDaoException;
 
+/*
+ * @see SancionDao
+ * @author andres montoya
+ */
 public class SancionDaoHibernate implements SancionDao {
 
 	

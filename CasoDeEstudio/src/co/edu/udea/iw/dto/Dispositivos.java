@@ -5,6 +5,16 @@ import java.sql.Blob;
 import javax.persistence.Column;
 import javax.persistence.Id;
 
+/*
+ * Esta clase será la clase pojo o dto, para la entidad dispositivo
+ * en esta clase se definen cada uno de los atributos que la entidad requeire
+ * y sus respectivos Setter y Getters.
+ * La entidad relacionada con esta clase tendrá las siguientes relaciones
+ * El primer dato será el atributo de esta clase y segundo será el nombre de el 
+ * atributo equivalente en la entidad
+ * 
+ */
+
 public class Dispositivos {
 	
 	private int Numero_serie;

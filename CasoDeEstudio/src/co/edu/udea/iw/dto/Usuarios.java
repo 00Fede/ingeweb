@@ -3,9 +3,11 @@ package co.edu.udea.iw.dto;
 import java.sql.Blob;
 
 /**
- * Objeto que representara una entidad de usuario de la base de datos.
- * @author root
- *
+ * Esta clase será la clase pojo o dto, relacionoada 
+ * con la entidad llamada usuarios, ademas de esto en esta
+ * clase se definen los atributos necesarios para poder 
+ * mapear con ayuda de hibernate la informacion, tambien cuenta
+ * con sus respectivos setter y getters.
  */
 public class Usuarios {
 	

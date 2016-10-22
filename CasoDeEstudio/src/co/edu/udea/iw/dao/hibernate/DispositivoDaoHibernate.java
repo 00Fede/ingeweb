@@ -18,6 +18,10 @@ import co.edu.udea.iw.dto.Dispositivos;
 import co.edu.udea.iw.dto.Usuarios;
 import co.edu.udea.iw.exception.MyDaoException;
 
+/*
+ * @see DispositivosDao
+ * @author andres montoya
+ */
 @Transactional
 public class DispositivoDaoHibernate implements DispositivosDao {
 

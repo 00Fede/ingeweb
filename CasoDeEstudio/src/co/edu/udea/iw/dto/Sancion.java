@@ -4,7 +4,13 @@ import java.util.Date;
 
 public class Sancion {
 
-	
+	/**
+	 * Esta clase será la clase pojo o dto, relacionoada 
+	 * con la entidad llamada sancion, ademas de esto en esta
+	 * clase se definen los atributos necesarios para poder 
+	 * mapear con ayuda de hibernate la informacion, tambien cuenta
+	 * con sus respectivos setter y getters.
+	 */
 	private int Id_sancion;
 	private Dispositivos Id_dispositivo;
 	private Usuarios Id_cedula;

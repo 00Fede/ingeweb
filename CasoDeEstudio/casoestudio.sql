@@ -34,7 +34,8 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   `id_cedula` int(12) NOT NULL,
   `id_responsable` int(12) NOT NULL,
   `fecha_inicio` date NOT NULL,
-  `tiempo_reserva` varchar(50) NOT NULL,
+  `tiempo_reserva` int(1) NOT NULL,
+  `estado` int(1) NOT NULL,
   PRIMARY KEY (`id_reserva`),
   FOREIGN KEY (`id_disp`) REFERENCES dispositivo(numero_unico_serie),
   FOREIGN KEY (`id_cedula`) REFERENCES usuarios(cedula),
@@ -46,12 +47,14 @@ CREATE TABLE IF NOT EXISTS `sancion` (
   `id_sancion` int(12) NOT NULL,
   `id_dis` int(12) NOT NULL,
   `id_ced` int(12) NOT NULL,
+  `id_responsable` int(12) NOT NULL,
   `fecha_ini` date NOT NULL,
   `razon` varchar(100) NOT NULL,
-  `tiempo_sancion` varchar(50) NOT NULL,
+  `tiempo_sancion` int(1) NOT NULL,
   PRIMARY KEY (`id_sancion`),
   FOREIGN KEY (`id_dis`) REFERENCES dispositivo(numero_unico_serie),
-  FOREIGN KEY (`id_ced`) REFERENCES usuarios(cedula)
+  FOREIGN KEY (`id_ced`) REFERENCES usuarios(cedula),
+  FOREIGN KEY (`id_responsable`) REFERENCES usuarios(cedula)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `autenticacion` (

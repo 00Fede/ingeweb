@@ -2,6 +2,17 @@ package co.edu.udea.iw.dto;
 
 import java.util.Date;
 
+/**
+ * Esta clase será la clase pojo o dto, para la entidad reserva
+ * en esta clase se definen cada uno de los atributos que la entidad requiere
+ * y sus respectivos Setter y Getters.
+ * La entidad relacionada con esta clase tendrá las siguientes relaciones
+ * El primer dato será el atributo de esta clase y segundo será el nombre de el 
+ * atributo equivalente en la entidad
+ * @author andres montoya
+ *
+ */
+
 public class Reserva {
 	
 	private int Id_reserva;
