@@ -57,7 +57,6 @@ CREATE TABLE IF NOT EXISTS `sancion` (
 CREATE TABLE IF NOT EXISTS `autenticacion` (
   `id_autenticacion` int(12) NOT NULL AUTO_INCREMENT,
   `id` int(12) NOT NULL,
-  `contrasena` varchar(50) NOT NULL,
   `fecha_auth` date NOT NULL,
   PRIMARY KEY (`id_autenticacion`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11;
@@ -87,4 +86,9 @@ INSERT INTO usuarios VALUES (1012,'Anibal','pelaez','investigador3','5baa61e4c9b
 'investigador','direccion4','anibal@laboratorio.com','3ab4','4440268','activo');
 INSERT INTO usuarios VALUES (777,'Soy','Superusuario','supersu','5baa61e4c9b93f3f068225645640b6cf8331b7ee68fd8',
 'superusuario','direccion7','superu@laboratorio.com','3ab4','7777777','activo');
+
+INSERT INTO sancion VALUES (8899,333,1012,'2016-10-40','limite de tiempo','72');
+
+INSERT INTO reserva VALUES (9988,333,1012,'1020','2016-10-18','72');
+
 

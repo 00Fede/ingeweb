@@ -60,5 +60,46 @@ public class UsuarioBlImpTest {
 			fail(e.getMessage());
 		}
 	}
+	
+	@Test
+	public void testLogin(){
+		int cedula = 10189;
+		String contrasena = "gueuhuig";
+		
+		try {
+			assertTrue(userBl.login(cedula, contrasena));
+		} catch (MyDaoException e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}
+	@Test
+	public void testCerrarSesion(){
+		int cedula = 65456456;
+		try {
+			userBl.cerrarSesion(cedula);
+		} catch (MyDaoException e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}
+	@Test
+	public void testDarseDeBajaLogicamente(){
+		try {
+			userBl.darseDeBajaLogicamenteInvestigador(1010);
+		} catch (MyDaoException e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}
+	@Test
+	public void testEliminarInvestigador(){
+		
+	}
+	@Test
+	public void testListarInvestigador(){
+		
+	}
+	
 
 }

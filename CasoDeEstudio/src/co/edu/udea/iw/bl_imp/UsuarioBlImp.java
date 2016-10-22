@@ -1,6 +1,8 @@
 package co.edu.udea.iw.bl_imp;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,13 +12,16 @@ import javax.sql.rowset.serial.SerialException;
 import com.mysql.jdbc.UpdatableResultSet;
 
 import co.edu.udea.iw.business_logic.UsuarioBl;
+import co.edu.udea.iw.dao.AuthDao;
 import co.edu.udea.iw.dao.ReservaDao;
 import co.edu.udea.iw.dao.SancionDao;
 import co.edu.udea.iw.dao.UsuariosDao;
+import co.edu.udea.iw.dto.Autenticacion;
 import co.edu.udea.iw.dto.Reserva;
 import co.edu.udea.iw.dto.Sancion;
 import co.edu.udea.iw.dto.Usuarios;
 import co.edu.udea.iw.exception.MyDaoException;
+import co.edu.udea.iw.security.Cifrar;
 import co.edu.udea.iw.util.validations.Validaciones;
 
 /**
@@ -26,22 +31,23 @@ import co.edu.udea.iw.util.validations.Validaciones;
  */
 public class UsuarioBlImp implements UsuarioBl {
 
-	
-
 	UsuariosDao userDao;
 	ReservaDao reservaDao;
 	SancionDao sancionDao;
+	AuthDao authDao;
 
 	/**
 	 * constructor para la inyeccion
+	 * 
 	 * @param userDao
 	 * @param reservaDao
 	 * @param sancionDao
 	 */
-	public UsuarioBlImp(UsuariosDao userDao, ReservaDao reservaDao, SancionDao sancionDao) {
+	public UsuarioBlImp(UsuariosDao userDao, ReservaDao reservaDao, SancionDao sancionDao, AuthDao authDao) {
 		this.userDao = userDao;
 		this.reservaDao = reservaDao;
 		this.sancionDao = sancionDao;
+		this.authDao = authDao;
 	}
 
 	@Override
@@ -49,7 +55,7 @@ public class UsuarioBlImp implements UsuarioBl {
 			String nombreUsuario, String contrasena, byte[] fotoRAW, String telefono, String direccion)
 			throws MyDaoException, SerialException, SQLException {
 		if (!isActiveUser(cedulaResponsable)) {
-			throw new MyDaoException("No se encuentra activo para hacer esta transacción", null);
+			throw new MyDaoException("No se encuentra activo para hacer esta transacci��n", null);
 		}
 		if (!matchRol(cedulaResponsable, "superusuario")) {
 			throw new MyDaoException("No tiene permisos para hacer esta transaccion", null);
@@ -61,7 +67,7 @@ public class UsuarioBlImp implements UsuarioBl {
 			throw new MyDaoException("Debe especificar nombre de usuario", null);
 		}
 		if (contrasena == null || "".equals(contrasena.trim())) {
-			throw new MyDaoException("Debe especificar contraseña", null);
+			throw new MyDaoException("Debe especificar contrase��a", null);
 		}
 		if (correo == null || "".equals(correo.trim())) {
 			throw new MyDaoException("Debe especificar correo electronico", null);
@@ -76,7 +82,7 @@ public class UsuarioBlImp implements UsuarioBl {
 			throw new MyDaoException("El correo electronico no es valido", null);
 		}
 		if (contrasena.length() < 6) {
-			throw new MyDaoException("La contraseña debe contener almenos 6 caracteres", null);
+			throw new MyDaoException("La contrase��a debe contener almenos 6 caracteres", null);
 		}
 		if (userDao.obtener(cedula) != null) {
 			throw new MyDaoException("El usuario ya existe.", null);
@@ -96,7 +102,8 @@ public class UsuarioBlImp implements UsuarioBl {
 		Usuarios user = new Usuarios();
 		user.setCedula(cedula);
 		user.setNombre(nombre);
-		user.setContrasena(contrasena);
+		Cifrar c = new Cifrar();
+		user.setContrasena(c.encrypt(contrasena));
 		user.setUsuario(nombreUsuario);
 		user.setApellido(apellido);
 		user.setDireccion(direccion);
@@ -113,9 +120,9 @@ public class UsuarioBlImp implements UsuarioBl {
 	public void eliminarAdministrador(int idResponsable, int idUsuario, String justificacion) throws MyDaoException {
 		Usuarios userResponsable = userDao.obtener(idResponsable);
 		if (!isActiveUser(idResponsable)) {
-			throw new MyDaoException("No se encuentra activo para hacer esta transacción", null);
+			throw new MyDaoException("No se encuentra activo para hacer esta transacci��n", null);
 		}
-		if(!matchRol(idResponsable,"superusuario")){
+		if (!matchRol(idResponsable, "superusuario")) {
 			throw new MyDaoException("No tiene permisos para hacer esta transaccion", null);
 		}
 		if (!userResponsable.getRol().equals("superusuario")) {
@@ -145,10 +152,10 @@ public class UsuarioBlImp implements UsuarioBl {
 	public void actualizarInformacion(int idResponsable, int idUsuario, String nuevaContrasena, String nuevoCorreo,
 			byte[] nuevaFotoRAW, String nuevoTelefono, String nuevaDireccion) throws MyDaoException {
 		if (!isActiveUser(idResponsable)) {
-			throw new MyDaoException("No se encuentra activo para hacer esta transacción", null);
+			throw new MyDaoException("No se encuentra activo para hacer esta transacci��n", null);
 		}
 		if (idResponsable != idUsuario) {
-			throw new MyDaoException("No puede modificar la información de otro usuario", null);
+			throw new MyDaoException("No puede modificar la informaci��n de otro usuario", null);
 		}
 		if (!Validaciones.isEmail(nuevoCorreo)) {
 			throw new MyDaoException("El correo electronico no es valido", null);
@@ -159,7 +166,8 @@ public class UsuarioBlImp implements UsuarioBl {
 		Usuarios updatedUser = new Usuarios();
 		updatedUser.setCedula(idUsuario);
 		if (!"".equals(nuevaContrasena.trim()) || nuevaContrasena != null) {
-			updatedUser.setContrasena(nuevaContrasena);
+			Cifrar c = new Cifrar();
+			updatedUser.setContrasena(c.encrypt(nuevaContrasena));
 		}
 		if (!"".equals(nuevoCorreo.trim()) || nuevoCorreo != null) {
 			updatedUser.setEmail(nuevoCorreo);
@@ -188,109 +196,193 @@ public class UsuarioBlImp implements UsuarioBl {
 		}
 		return false;
 	}
-	
-	private boolean isActiveUser(int id) throws MyDaoException{
+
+	private boolean isActiveUser(int id) throws MyDaoException {
 		Usuarios userResponsable = userDao.obtener(id);
 		if (userResponsable.getEstado().equals("inactivo")) {
 			return false;
 		}
 		return true;
 	}
-	
-	private boolean hasActiveReserves(int id) throws MyDaoException{
+
+	private boolean hasActiveReserves(int id) throws MyDaoException {
 		List<Reserva> r = reservaDao.obtener();
 		Iterator<Reserva> i = r.iterator();
-		while(i.hasNext()){
-			if(i.next().getId_cedula().getCedula()==id){
+		while (i.hasNext()) {
+			if (i.next().getId_cedula().getCedula() == id) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	private boolean hasActiveSanctions(int id) throws MyDaoException{
+
+	private boolean hasActiveSanctions(int id) throws MyDaoException {
 		List<Sancion> s = sancionDao.obtener();
 		Iterator<Sancion> i = s.iterator();
-		while(i.hasNext()){
-			if(i.next().getId_cedula().getCedula()==id){
+		while (i.hasNext()) {
+			if (i.next().getId_cedula().getCedula() == id) {
 				return true;
 			}
 		}
 		return false;
 	}
- 
+
+	/**
+	 * Revisa si existe por lo menos un investigador en el sistema
+	 * 
+	 * @return true si existe por lo menos un investigador, false en caso
+	 *         contrario.
+	 * @throws MyDaoException
+	 */
+	private boolean existInvest() throws MyDaoException {
+		List<Usuarios> u = userDao.obtener();
+		Iterator<Usuarios> i = u.iterator();
+		while (i.hasNext()) {
+			if (i.next().getRol().equals("investigador")) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Revisa si el usuario con cedula ingresada existe en el sistema
+	 * 
+	 * @param cedula
+	 *            - cedula del usuario
+	 * @return true si existe, false en caso contrario
+	 * @throws MyDaoException
+	 */
+	private boolean userExist(int cedula) throws MyDaoException {
+		return (userDao.obtener(cedula) != null);
+	}
+
 	@Override
 	public void darseDeBajaLogicamenteInvestigador(int idUsuario) throws MyDaoException {
-		if(!isActiveUser(idUsuario)){
-			throw new MyDaoException("No se encuentra activo para hacer esta transacción", null);
+		if (idUsuario == 0) {
+			throw new MyDaoException("Debe especificar cedula.", null);
 		}
-		if(!matchRol(idUsuario,"investigador")){
-			throw new MyDaoException("No tiene permisos para hacer esta transaccion", null);
+		if (!userExist(idUsuario)) {
+			throw new MyDaoException("El usuario no existe", null);
 		}
-		if(hasActiveReserves(idUsuario)){
-			throw new MyDaoException("El usuario tiene reservas activas", null);
-		}
-		if(hasActiveSanctions(idUsuario)){
-			throw new MyDaoException("El usuario tiene sanciones activas", null);
+		if (!isActiveUser(idUsuario)) {
+			throw new MyDaoException("No se encuentra activo para hacer esta transacci��n", null);
 		}
 		
+		if (!matchRol(idUsuario, "investigador")) {
+			throw new MyDaoException("No tiene permisos para hacer esta transaccion", null);
+		}
+		if (hasActiveReserves(idUsuario)) {
+			throw new MyDaoException("El usuario tiene reservas activas", null);
+		}
+		if (hasActiveSanctions(idUsuario)) {
+			throw new MyDaoException("El usuario tiene sanciones activas", null);
+		}
+
 		Usuarios delInv = userDao.obtener(idUsuario);
 		delInv.setEstado("inactivo");
 		userDao.modificar(delInv);
-		
+
 	}
 
 	@Override
 	public void eliminarInvestigador(int idResponsable, int idUsuario, String justificacion) throws MyDaoException {
-		if(!isActiveUser(idUsuario)){
+		if (!isActiveUser(idUsuario)) {
 			throw new MyDaoException("El usuario ya fue eliminado", null);
 		}
-		if(!isActiveUser(idResponsable)){
-			throw new MyDaoException("No se encuentra activo para hacer esta transacción", null);
+		if (!isActiveUser(idResponsable)) {
+			throw new MyDaoException("No se encuentra activo para hacer esta transacci��n", null);
 		}
-		if(!matchRol(idResponsable,"administrador")){
+		if (!matchRol(idResponsable, "administrador")) {
 			throw new MyDaoException("No tiene permisos para hacer esta transaccion", null);
 		}
-		if(!matchRol(idUsuario,"investigador")){
+		if (!matchRol(idUsuario, "investigador")) {
 			throw new MyDaoException("No puede eliminar este tipo de usuario", null);
 		}
-		if(hasActiveReserves(idUsuario)){
+		if (hasActiveReserves(idUsuario)) {
 			throw new MyDaoException("El usuario tiene reservas activas", null);
 		}
-		if(hasActiveSanctions(idUsuario)){
+		if (hasActiveSanctions(idUsuario)) {
 			throw new MyDaoException("El usuario tiene sanciones activas", null);
 		}
 		if (justificacion.equals(null) || "".equals(justificacion.trim())) {
 			throw new MyDaoException("Debe ingresar una justificacion", null);
 		}
-		
+
 		Usuarios delInv = userDao.obtener(idUsuario);
 		delInv.setEstado("inactivo");
 		userDao.modificar(delInv);
 	}
 
 	@Override
-	public List<Usuarios> listarInvestigadores() throws MyDaoException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Usuarios> listarInvestigadores(int idResponsable) throws MyDaoException {
+		if (!isActiveUser(idResponsable)) {
+			throw new MyDaoException("No se encuentra activo para hacer esta transacciones", null);
+		}
+		if (!matchRol(idResponsable, "administrador")) {
+			throw new MyDaoException("No tiene permisos para hacer esta transaccion", null);
+		}
+		if (!existInvest()) {
+			throw new MyDaoException("No existen investigadores", null);
+		}
+		List<Usuarios> userList = userDao.obtener();
+		List<Usuarios> invList = new ArrayList<>();
+		Iterator<Usuarios> i = userList.iterator();
+		while (i.hasNext()) {
+			Usuarios u = i.next();
+			if (u.getRol().equals("investigador")) {
+				invList.add(u);
+			}
+		}
+		return invList;
 	}
 
 	@Override
-	public boolean login(String nombreUsuario, String contrasena) throws MyDaoException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean login(int cedula, String contrasena) throws MyDaoException {
+		boolean resultado = false;
+		if (cedula == 0) {
+			throw new MyDaoException("Debe especificar cedula.", null);
+		}
+		if (contrasena == null || "".equals(contrasena.trim())) {
+			throw new MyDaoException("Debe especificar contraseña", null);
+		}
+		if (!userExist(cedula)) {
+			throw new MyDaoException("El usuario no existe", null);
+		}
+		if (!isActiveUser(cedula)) {
+			throw new MyDaoException("El usuario no se encuentra activo.", null);
+		}
+		Usuarios user = userDao.obtener(cedula);
+		Cifrar c = new Cifrar();
+		String encryptedPass = c.encrypt(contrasena);
+		if (user.getContrasena().equals(encryptedPass)) {
+			resultado = true;
+			Autenticacion auth = new Autenticacion();
+			auth.setId(cedula);
+			auth.setFecha_auth(new Date());
+			authDao.guardar(auth);
+			return resultado;
+		}
+		return resultado;
 	}
 
 	@Override
-	public boolean cerrarSesion() throws MyDaoException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Usuarios obtenerUsuarioConectado() throws MyDaoException {
-		// TODO Auto-generated method stub
-		return null;
+	public void cerrarSesion(int cedula) throws MyDaoException {
+		if (cedula == 0) {
+			throw new MyDaoException("Debe especificar cedula.", null);
+		}
+		if (!userExist(cedula)) {
+			throw new MyDaoException("El usuario no existe", null);
+		}
+		if (!isActiveUser(cedula)) {
+			throw new MyDaoException("El usuario no se encuentra activo.", null);
+		}
+		if(authDao.obtener().getId()!=cedula){
+			throw new MyDaoException("Su sesion no esta abierta",null);
+		}
+		Autenticacion a = new Autenticacion();
+		a.setId(cedula);
+		authDao.eliminar(a);
 	}
 
 }
