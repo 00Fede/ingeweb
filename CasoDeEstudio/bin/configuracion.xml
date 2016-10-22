@@ -102,6 +102,9 @@
 		<constructor-arg name="reservaDao" ref="reservaDao"></constructor-arg>
 	</bean>
 	
+	<bean name="sancionBl" class="co.edu.udea.iw.bl_imp.SancionBlImp">
+		<constructor-arg name="sancionDao" ref="sancionDao"></constructor-arg>
+	</bean>
 
 
 </beans>
