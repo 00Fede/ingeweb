@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>JerseyHolaMundo</display-name>
+	
+	<servlet>
+	<!--configuracion del servlet-->
+		<servlet-name>Jersey REST Service</servlet-name>
+		<!-- Que clase va a responder a las peticiones de este servlet -->
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<!-- Param inicial que se necesita para ejecutar el servlet -->
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name><!-- siempre es asi -->
+			<param-value>co.udea.edu.iw.ws</param-value>
+		</init-param>
+		<!-- servlet carga al iniciar, el numero es la prioridad -->
+		<load-on-startup>1 </load-on-startup>
+	</servlet>
+	
+	<!-- mapeo de servlets (Un servlet-mapping por servlet)-->
+	<servlet-mapping>
+		<servlet-name>Jersey REST Service</servlet-name>
+		<url-pattern>/rest/* </url-pattern> <!-- la url asociada al servlet -->
+	</servlet-mapping>
+	
+</web-app>
