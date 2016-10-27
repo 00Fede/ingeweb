@@ -1,10 +1,6 @@
 package co.edu.udea.iw.dao.hibernate;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
-
-import org.hibernate.Transaction;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;

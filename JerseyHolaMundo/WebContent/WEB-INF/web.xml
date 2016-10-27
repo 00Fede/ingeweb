@@ -9,7 +9,7 @@
 	<!--configuracion del servlet-->
 		<servlet-name>Jersey REST Service</servlet-name>
 		<!-- Que clase va a responder a las peticiones de este servlet -->
-		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
 		<!-- Param inicial que se necesita para ejecutar el servlet -->
 		<init-param>
 			<param-name>com.sun.jersey.config.property.packages</param-name><!-- siempre es asi -->
@@ -25,4 +25,15 @@
 		<url-pattern>/rest/* </url-pattern> <!-- la url asociada al servlet -->
 	</servlet-mapping>
 	
+	<!-- needed for ContextLoaderListener -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring_config.xml</param-value>
+	</context-param>
+
+	<!-- Bootstraps the root web application context before servlet initialization 
+	Busca en la inicializacion de la app web el archivo de configuracion de spring-->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 </web-app>

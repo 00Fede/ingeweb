@@ -3,6 +3,7 @@
 	<name>JerseyHolaMundo</name>
 	<comment></comment>
 	<projects>
+		<project>SpringHibernate</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

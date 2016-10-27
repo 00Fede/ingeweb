@@ -3,6 +3,7 @@ package co.edu.udea.iw.bl.imp;
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import co.edu.udea.iw.bl.ClienteBl;
 import co.edu.udea.iw.dao.ClienteDao;
@@ -74,6 +75,11 @@ public class ClienteBlImp implements ClienteBl {
 	
 		clienteDao.guardar(cliente);
 		
+	}
+	
+	@Override
+	public List<Cliente> obtener() throws MyDaoException {
+		return clienteDao.obtener();
 	}
 
 }
