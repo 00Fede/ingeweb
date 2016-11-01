@@ -14,7 +14,7 @@
         <property name="nombres" type="java.lang.String">
             <column name="Nombres" length="45" />
         </property>
-        <property name="contraseña" type="java.lang.String">
+        <property name="contrasena" type="java.lang.String">
             <column name="Contrasena" length="125" />
         </property>
         <!-- update=false insert=false si se quiere sobre este elemento hacer 

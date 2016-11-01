@@ -5,7 +5,7 @@
 -- Servidor: localhost
 -- Tiempo de generación: 08-03-2014 a las 22:18:24
 -- Versión del servidor: 5.1.36
--- Versión de PHP: 5.3.0
+-- Versión de PHP: 5un.xml.internal.bind.v2.runtime.Illega.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 

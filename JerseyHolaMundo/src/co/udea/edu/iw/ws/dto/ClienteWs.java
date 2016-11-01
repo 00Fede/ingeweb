@@ -5,6 +5,8 @@ package co.udea.edu.iw.ws.dto;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 /**
  * Clase tipo POJO que contiene los atributos necesarios para
  * obtener el servicio obtenerTodos()
@@ -16,15 +18,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ClienteWs {
 	
 	
-	private String nombres;
+	private String name;
 	private String apellidos;
 	private String identificacion;
 	private String email;
 	
+	/**
+	 * Constructor por defecto para inyeccion de spring
+	 */
+	public ClienteWs(){
+	}
 	
-	public ClienteWs(String nombres, String apellidos, String identificacion, String email) {
+	public ClienteWs(String name, String apellidos, String identificacion, String email) {
 		super();
-		this.nombres = nombres;
+		this.name = name;
 		this.apellidos = apellidos;
 		this.identificacion = identificacion;
 		this.email = email;
@@ -45,14 +52,14 @@ public class ClienteWs {
 	/**
 	 * @return the nombres
 	 */
-	public String getNombres() {
-		return nombres;
+	public String getName() {
+		return name;
 	}
 	/**
 	 * @param nombres the nombres to set
 	 */
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
+	public void setName(String names) {
+		this.name = names;
 	}
 	/**
 	 * @return the apellidos

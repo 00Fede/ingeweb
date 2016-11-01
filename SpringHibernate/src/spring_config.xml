@@ -84,6 +84,7 @@
 		<constructor-arg name="clienteDao" ref="clienteDao"></constructor-arg>
 		<constructor-arg name="usuarioDao" ref="usuarioDao"></constructor-arg>
 	</bean>
+	
 	<!-- Vaya escanee carpeta que alla hay elementos candidatos a inyectar 
 	va al base-package y busca clases anotadas con @Component-->
 	<context:component-scan base-package="co.udea.edu.iw.ws"></context:component-scan>
