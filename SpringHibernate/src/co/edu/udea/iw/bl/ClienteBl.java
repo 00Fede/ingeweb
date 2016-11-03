@@ -3,6 +3,8 @@ package co.edu.udea.iw.bl;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import co.edu.udea.iw.dto.Cliente;
 import co.edu.udea.iw.exception.MyDaoException;
 
@@ -12,7 +14,6 @@ import co.edu.udea.iw.exception.MyDaoException;
  * @author estudiantelis
  *
  */
-
 public interface ClienteBl {
 	
 	/**

@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import co.edu.udea.iw.bl.ClienteBl;
 import co.edu.udea.iw.dao.ClienteDao;
 import co.edu.udea.iw.dao.UsuarioDao;
@@ -18,7 +20,7 @@ import co.edu.udea.iw.util.validations.Validaciones;
  * @author estudiantelis
  *
  */
-
+@Transactional
 public class ClienteBlImp implements ClienteBl {
 
 	// Es inyectado con toda la configuraci��n de conexion a la bd

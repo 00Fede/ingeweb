@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.udea.iw.dao.ClienteDao;
 import co.edu.udea.iw.dto.Cliente;
@@ -48,7 +49,7 @@ public class ClienteDaoHibernate implements ClienteDao {
 	@Override
 	public Cliente obtener(String cedula) throws MyDaoException {
 		Session session = null;
-
+		
 		Cliente cliente = null;
 
 		try {
@@ -66,12 +67,15 @@ public class ClienteDaoHibernate implements ClienteDao {
 	@Override
 	public void guardar(Cliente cliente) throws MyDaoException {
 		Session session = null;
+		//Transaction tx = null;
 
 		try {
 			session = getSessionFactory().openSession();
 			// guarda el objeto cliente en la base de datos
 			// el tx.commit se quita para que se pueda hacer rollback
+			//tx = session.beginTransaction();
 			session.save(cliente);
+			//tx.commit();
 
 		} catch (HibernateException e) {
 			throw new MyDaoException(e);

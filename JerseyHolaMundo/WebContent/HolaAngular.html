@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mi primer Angular</title>
+
+</head>
+<body ng-app>
+Digite su nombre
+<!-- ng-model: asigna el input a variable nombre  -->
+<input type="text" size="40" ng-model="nombre">
+Nombre Digitado: <div>{{nombre}}</div>
+
+<br>
+<br>
+<br>
+
+Digite su nombre
+<input id="textoDigitado" type="text" size="40" onkeyup="escribir(this.value)"/>
+<br>
+Nombre Digitado: <div id=nombrec></div>
+
+<script type="text/javascript" src="angular.min.js"></script>
+<script type="text/javascript">
+	function escribir(value){
+		var my_div = document.getElementById("nombrec");
+		my_div.innerHTML = value;
+	}
+	
+</script>
+</body>
+</html>
