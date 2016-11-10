@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>formulario</title>
+<script src="../resources/js/angular.min.js"></script>
+<script type="text/javascript" src="../resources/js/formulario.js"></script>
+</head>
+<!--  la directiva ng-app sirve para definir el modulo con el que se va a trabajar esta vista 
+ ng-app="nombre_de_modulo_a_usar"-->
+<body ng-app="formulario">
+<div ng-controller="form">
+<form ng-submit="agregar()">
+	<label>Digite su nombre:</label>
+	<input type="text" size="40" placeholder="Nombre" ng-model="myName" required="required">
+	<input type="submit" value="Agregar2">
+	<table>
+		<tr ng-repeat="name in lista">
+			<td>
+				<input type="checkbox" ng-model="name.seleccionado"/>
+			</td>
+			<td>{{name.texto}}</td>
+		</tr>
+	</table>
+</form>
+<button ng-click="eliminar()">Eliminar seleccionados</button>
+<button ng-click="eliminar2()">Eliminar seleccionados2</button>
+</div>
+</body>
+</html>
