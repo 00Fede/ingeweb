@@ -6,14 +6,14 @@
  <!-- El nombre de table debe coincidir con el nombre de la tabla -->
  <class name="co.edu.udea.iw.dto.Ciudad" table="ciudades">
   <id name="codigo" type="java.lang.Long">
-   <column name="CODIGO" precision="0" scale="12"/>
+   <column name="codigo" precision="0" scale="12"/>
    <generator class="assigned"/>
   </id>
   <property generated="never" lazy="false" name="nombre" type="java.lang.String">
-   <column length="50" name="NOMBRE" not-null="true"/>
+   <column length="50" name="Nombre" not-null="true"/>
   </property>
   <property generated="never" lazy="false" name="codigoArea" type="java.lang.String">
-   <column length="4" name="CODIGOAREA" not-null="false"/>
+   <column length="4" name="CodigoArea" not-null="false"/>
   </property>
  </class>
 </hibernate-mapping>
