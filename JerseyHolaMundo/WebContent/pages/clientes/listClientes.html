@@ -4,14 +4,14 @@
 		<tr>
 			<th>Identificación</th>
 			<th>Nombre Completo</th>
-			<th>Correo Electronico</th>	
+			<th>Correo Electrónico</th>	
 		</tr>
-		
-		<tr ng-repeat="cliente in listaClientes" ng-if="listaClientes.length > 1">
+		<tr ng-repeat="cliente in listaClientes">
 			<td>{{cliente.identificacion}}</td>
 			<td>{{cliente.name}} {{cliente.apellidos}}</td>
 			<td>{{cliente.email}}</td>
-		</tr>	
+		</tr>
+		
 	</table>
 	<button type="button">Crear nuevo</button>
 </div>

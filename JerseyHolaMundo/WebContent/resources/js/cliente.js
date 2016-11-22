@@ -1,5 +1,9 @@
 /**
+ * Modulo de angular para manejar la interacción del usuario con las vistas de manera
+ * dinamica
  * 
+ * 
+ * @author Federico Ocampo
  */
 
 const URL_HOME = "http://localhost:8080/JerseyHolaMundo/rest/";
@@ -8,6 +12,9 @@ const URL_CLIENTES = "ServicioCliente";
 //en el segundo arg de module(), agregar las dependencias de angular
 angular.module('clientes',["ngRoute"])
 
+/**
+ * Servicio para acceder al servicio web de hacer login al usuario
+ */
 .service('loginUser', function($http) {
 	
 	this.autenticar = function(usuario, pass) {
@@ -24,7 +31,9 @@ angular.module('clientes',["ngRoute"])
 	
 	
 })
-
+/**
+ * Servicio que llama el servicio web listarClientes
+ */
 .service('clientes', function($http) {
 	this.listarClientes = function(){
 		return $http({
@@ -47,6 +56,9 @@ angular.module('clientes',["ngRoute"])
 			});
 }])
 
+/**
+ * Controlador que permite manejar el login del usuario en la vista
+ */
 .controller('loginCtrl', function($scope,$location, loginUser) {
 	//$scope es el modelo que permite interaccion entre vista y controlador
 	$scope.username = '';
@@ -70,22 +82,28 @@ angular.module('clientes',["ngRoute"])
 	
 	
 })
-//Que pasa si el data solo tiene un objeto (un elemento de arraylist), como hago para iterar eso en forma concreta
 
+/**
+ * Controlador que maneja la interacción con la vista de lista de clientes,
+ * aqui se accede al servicio listarClientes definido en el modulo y se valida
+ * si el resultado es un array de clientes o un solo elemento.
+ */
 .controller('clienteCtrl' , function($scope, clientes) {
 	//listarClientes se llama al inicializar controlador
 	clientes.listarClientes().then(function successCallback(response) {
 		var l = response.data.clienteWs.length;
 		
 		console.log("Data de la respuesta" + JSON.stringify(response.data));
-		console.log("Long de data con metodo length()" + response.data.clienteWs.length);
 		console.log("longitud de response con attr length: " + l);
 		$scope.listaClientes = response.data.clienteWs;
-		if(l>1){
+		if(l!=undefined){
 			$scope.listaClientes = response.data.clienteWs;
+			console.log("array que retorna a vista: " +  JSON.stringify($scope.listaClientes));
 		}else{
-			$scope.listaClientes[0] = response.data.clienteWs;
+			$scope.listaClientes = response.data;
+			console.log("Single data set de cliente:" + $scope.listaClientes);
 		}
+		
 	}, function errorCallback(response) {
 		alert("Ha ocurrido un error consultado los clientes");
 	});
