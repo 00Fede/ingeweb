@@ -70,6 +70,9 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   KEY `UsuarioElimina` (`UsuarioElimina`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `clientes` (`Cedula`, `Nombres`, `Apellidos`, `Email`, `UsuarioCrea`, `FechaCreacion`, `UsuarioModifica`,`Eliminado`, `UsuarioElimina`,`FechaEliminacion`) VALUES ('12345', 'Nombre', 'Apellido', 'correo@correo.com', 'elver','2016-11-10','elver','2016-11-10', 0,'elver','2010-10-10');
+('juan', 'Juan', 'Pinzon', 'qUZSqpfHIRuolU3RWjz4OA==', 'AUD');
+
 --
 -- Volcar la base de datos para la tabla `clientes`
 --

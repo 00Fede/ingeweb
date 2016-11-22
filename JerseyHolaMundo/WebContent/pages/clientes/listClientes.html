@@ -1,0 +1,17 @@
+<div>
+	<table border="1" width="100%">
+	
+		<tr>
+			<th>Identificación</th>
+			<th>Nombre Completo</th>
+			<th>Correo Electronico</th>	
+		</tr>
+		
+		<tr ng-repeat="cliente in listaClientes" ng-if="listaClientes.length > 1">
+			<td>{{cliente.identificacion}}</td>
+			<td>{{cliente.name}} {{cliente.apellidos}}</td>
+			<td>{{cliente.email}}</td>
+		</tr>	
+	</table>
+	<button type="button">Crear nuevo</button>
+</div>
